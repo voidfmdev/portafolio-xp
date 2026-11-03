@@ -129,11 +129,12 @@ Fuera de alcance de la v1: IA en vivo, backend propio, CMS, sonidos, redimension
 - Ventana de mensajería: cabecera con avatar del personaje, nombre del asistente, estado "Disponible" y mensaje personal; historial con marcas de hora; avatar del visitante "Tú"/"You".
 - Botones de preguntas predefinidas (4 iniciales, como la referencia: ¿Quién eres? · ¿Qué proyectos has creado? · ¿Cuáles son tus habilidades? · ¿Cómo puedo contactarte?) y preguntas de seguimiento según la respuesta.
 - Respuestas desde `messenger.json`: texto bilingüe + acciones opcionales (`openWindow`, `externalLink`, `setLanguage`). Efecto "escribiendo…" corto, desactivado con `prefers-reduced-motion`.
+- Una respuesta sin preguntas de seguimiento (`followUps`) vuelve a ofrecer las preguntas iniciales (`start`): la conversación nunca queda sin salida [DE D22].
 - Sin IA en vivo [DE]: un asistente con IA requiere backend y clave; en un sitio estático la clave quedaría expuesta [RS].
 
 ### 5.7 Asistente de escritorio ("comentarista")
 - Mismo personaje que en Messenger. Vive en una esquina del escritorio y comenta mediante un globo estilo aviso de bandeja de XP.
-- Eventos que disparan comentarios (desde `assistant.json`): primera visita, abrir cada ventana (una vez por sesión), inactividad de 60 s, cerrar todas las ventanas, cambiar idioma, intentar arrastrar en móvil.
+- Eventos que disparan comentarios (desde `assistant.json`): primera visita, abrir cada ventana (una vez por sesión), inactividad de 60 s, cerrar todas las ventanas, cambiar idioma, intentar arrastrar en móvil, y `help`: "Ayuda" del menú Inicio muestra al asistente con instrucciones de uso del escritorio [DE D23].
 - Reglas: cola de mensajes, un globo a la vez, botón cerrar, opción "No mostrar más" (persistente), apagado también desde Panel de control. En móvil: botón flotante.
 - Animaciones propias en SVG/CSS: reposo (parpadeo), saludo, hablar, pensar. El personaje se implementa como componente `Character` con un contrato fijo de animaciones, para que sea intercambiable sin tocar el motor [D5 pendiente].
 
@@ -157,7 +158,9 @@ Fuera de alcance de la v1: IA en vivo, backend propio, CMS, sonidos, redimension
 ## 7. Modelo de contenido
 
 Archivos en `src/content/`: `profile.json`, `projects.json`, `skills.json`, `experience.json`, `contact.json`, `messenger.json`, `assistant.json`.
-Esquemas con validación en build (p. ej. Zod) para detectar textos faltantes en un idioma. Esquemas detallados en `docs/content-schema.md` [PE Fase 2].
+Esquemas con validación en build (p. ej. Zod) para detectar textos faltantes en un idioma. Esquemas detallados en `docs/content-schema.md` [DE D17].
+- **Modo estricto de contenido** [DE D21]: con `CONTENT_STRICT=true`, el build falla si queda un marcador (`<…>`, `[RELLENO]`) en URLs, correos, rutas de archivos o textos. Se activa en el workflow de despliegue al cerrar la Fase 3; hasta entonces queda apagado, para publicar la demo de la Fase 2 con relleno.
+- **Título, descripción y Open Graph** [DE D24]: salen del campo `site` de `profile.json` y se escriben en `index.html` al construir el sitio (español por defecto, `og:locale` `es_CL` con alternativa `en_US`), porque los rastreadores no ejecutan JavaScript.
 
 ## 8. Diseño visual (guía; se fija en Fase 1 o al inicio de Fase 2 según D6)
 

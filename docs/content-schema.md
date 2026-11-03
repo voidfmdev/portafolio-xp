@@ -1,7 +1,7 @@
 # Esquemas de contenido — Portafolio XP
 
-Estado: **[PE] propuesta para validación** · Fecha: 2026-11-03 · Decisión asociada: D17.
-Fuente: `docs/spec.md` §5 y §7. Los campos que la spec enumera literalmente (Proyectos §5.2, Habilidades §5.3) se respetan; el resto es propuesta y las dudas están en §9.
+Estado: **[DE]** · Fecha: 2026-11-03 · Decisiones asociadas: D17 y D20 a D24.
+Fuente: `docs/spec.md` §5 y §7. Los campos que la spec enumera literalmente (Proyectos §5.2, Habilidades §5.3) se respetan; el resto lo fija D17, y las preguntas que quedaban abiertas se resolvieron en D20 a D24 (§9).
 Implementación: esquemas Zod en `src/content/schema.ts` (Fase 2), validados en una prueba de Vitest y en `build`.
 
 ## 0. Convenciones
@@ -11,16 +11,16 @@ Notación tipo TypeScript; `?` = opcional. El orden de cada lista es el orden en
 | Tipo | Forma | Regla |
 |------|-------|-------|
 | `Text` | `{ "es": string, "en": string }` | Ambos obligatorios y no vacíos: así se detecta un texto que falta en un idioma (spec §7) |
-| `Name` | `string` o `Text` | Nombre propio: un `string` si es igual en ambos idiomas, `Text` si se traduce |
+| `Name` | `string` o `Text` | `string` para un nombre propio que no se traduce; `Text` para un nombre que cambia con el idioma (habilidades blandas, certificaciones). La prueba de paridad revisa los `Text` (D20) |
 | `IsoDate` | `"YYYY-MM"` o `"YYYY-MM-DD"` | Fecha real de calendario (`isIsoDate` en `src/lib/dates.ts`) |
 | `Slug` | `"mi-proyecto"` | `^[a-z0-9]+(-[a-z0-9]+)*$`, único en su lista; se usa en los enlaces `#/…` |
 | `Url` | `"https://…"` | URL absoluta `https:` |
 | `Email` | `"…@…"` | Correo válido |
 | `AssetPath` | `"cv/<alias>-cv-es.pdf"` | Ruta dentro de `public/`, sin `/` inicial, para que funcione con cualquier `base` (D15) |
-| `Marker` | `"<correo>"` | Marcador `<…>` de la spec §3 (principio 5). Mientras existan, `Url`, `Email` y `AssetPath` también aceptan un marcador |
+| `Marker` | `"<correo>"` | Marcador `<…>` de la spec §3 (principio 5). Con el modo estricto apagado, `Url`, `Email` y `AssetPath` también aceptan un marcador; con el modo estricto encendido, no (§8, D21) |
 | `AppId` | `"about"` … | `about` · `projects` · `skills` · `experience` · `contact` · `messenger` · `recycle-bin` · `control-panel` |
 
-- El texto de relleno va marcado: `"[RELLENO] …"`.
+- El texto de relleno va marcado: `"[RELLENO] …"`; el modo estricto lo rechaza (§8, D21).
 - **No van aquí** los textos de interfaz (títulos de ventana, botones, subtítulos del menú Inicio, "En línea", "Disponible", "Presente"): viven en `src/i18n/es.json` y `en.json`.
 - Datos personales (nombre, correo, redes, rutas de CV) solo en estos JSON (R1).
 
@@ -41,8 +41,14 @@ Notación tipo TypeScript; `?` = opcional. El orden de cada lista es el orden en
     body: Text
   }>
   cv: { es: AssetPath; en: AssetPath }   // "cv/<alias>-cv-es.pdf", "cv/<alias>-cv-en.pdf"
+  site: {                            // <title>, descripción y Open Graph de index.html (D24)
+    title: Text
+    description: Text
+  }
 }
 ```
+
+- `site` lo lee el build, no la interfaz: el gancho de Vite para el HTML lo escribe en `index.html` en español por defecto, con `og:locale` `es_CL` y `og:locale:alternate` `en_US` (D24). Los rastreadores no ejecutan JavaScript, por eso no basta con escribirlo en tiempo de ejecución.
 
 ## 2. `projects.json` — Proyectos (spec §5.2)
 
@@ -152,6 +158,7 @@ type Action =
   | { type: "setLanguage"; lang: "es" | "en"; label: Text }
 ```
 
+- Una respuesta sin `followUps` vuelve a ofrecer las preguntas de `start`, así la conversación nunca queda sin salida (D22).
 - Todo id de `start` y `followUps` existe en `questions`; los ids no se repiten.
 - `target` solo con `app: "projects"` o `"skills"`, y debe existir en `projects.json` o `skills.json` (validación entre archivos).
 - El avatar es el personaje del asistente (contrato `Character`), no una imagen; "Disponible" y las horas los pone la interfaz.
@@ -184,7 +191,7 @@ Ejemplo mínimo:
   allWindowsClosed: Text
   languageChanged: Text              // se muestra en el idioma nuevo
   mobileDragAttempt: Text
-  help: Text                         // menú Inicio › Ayuda (spec §4.4); ver §9
+  help: Text                         // menú Inicio › Ayuda: instrucciones de uso del escritorio (spec §4.4, D23)
 }
 ```
 
@@ -193,11 +200,9 @@ Ejemplo mínimo:
 - Un esquema Zod por archivo y los tipos de TypeScript derivados de ellos (`z.infer`), así el código y el JSON no se separan.
 - Comprobaciones entre archivos: `target` de Messenger, unicidad de slugs e ids.
 - Se ejecuta en `npm run test` y en `npm run build`; un JSON inválido corta el build con el archivo y la ruta del campo.
+- Paridad (D20): todo `Text`, incluido el de un `Name` bilingüe, tiene `es` y `en` no vacíos.
+- Modo estricto (D21): con `CONTENT_STRICT=true`, el build falla si queda un marcador (`<…>` o `[RELLENO]`) en `Url`, `Email`, `AssetPath` o en cualquier texto (`Text`, `Name` y cadenas simples como `name` o `alias`). Se activa en el workflow de despliegue al cerrar la Fase 3; hasta entonces queda apagado y los marcadores se aceptan.
 
-## 9. Preguntas abiertas [PE]
+## 9. Preguntas resueltas
 
-1. **`Name` = `string` o `Text`** para nombres propios (proyecto, empresa, institución, ítem de habilidad). La spec muestra `name` como texto simple; sin `Text`, las habilidades blandas y certificaciones no se pueden traducir.
-2. **Marcadores en `Url`, `Email` y `AssetPath`**: se aceptan durante la Fase 2. ¿Se prohíben en la Fase 3, para que el build falle si queda alguno?
-3. **Messenger sin `followUps`**: propuesta, volver a ofrecer las preguntas de `start`.
-4. **Evento `help`** del asistente: no está en la lista de §5.7, pero el menú Inicio tiene "Ayuda (abre el asistente)".
-5. **SEO**: el `<title>`, la descripción y Open Graph tienen que estar en el `index.html` estático (los rastreadores no ejecutan JS), pero contienen datos personales. Propuesta para la Fase 2: inyectarlos en el build desde `profile.json`; eso agregaría un campo `site: { title: Text; description: Text }` aquí.
+Ver D20 a D24 en `docs/decisiones.md`.
