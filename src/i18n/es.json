@@ -1,0 +1,111 @@
+{
+  "language.name": "Español",
+  "language.code": "ES",
+
+  "welcome.instruction": "Para comenzar, haz clic en tu nombre de usuario",
+  "welcome.account": "Invitado · Español",
+  "welcome.accounts": "Cuentas de usuario",
+
+  "desktop.label": "Escritorio",
+
+  "apps.about.title": "Sobre mí",
+  "apps.about.subtitle": "Conóceme",
+  "apps.projects.title": "Proyectos",
+  "apps.projects.subtitle": "Explora mi trabajo",
+  "apps.skills.title": "Habilidades",
+  "apps.skills.subtitle": "Mi caja de herramientas",
+  "apps.experience.title": "Experiencia",
+  "apps.experience.subtitle": "Trayectoria y educación",
+  "apps.contact.title": "Contacto",
+  "apps.contact.subtitle": "Hablemos",
+  "apps.messenger.title": "Messenger",
+  "apps.messenger.subtitle": "Un mensaje de bienvenida",
+  "apps.recycle-bin.title": "Papelera de reciclaje",
+  "apps.control-panel.title": "Panel de control",
+
+  "actions.downloadCv": "Descargar CV",
+
+  "taskbar.label": "Barra de tareas",
+  "taskbar.start": "Inicio",
+  "taskbar.windows": "Ventanas abiertas",
+
+  "tray.label": "Área de notificación",
+  "tray.language": "Idioma: {current}. Cambiar a {next}",
+  "tray.assistantShow": "Mostrar asistente",
+  "tray.assistantHide": "Ocultar asistente",
+
+  "startMenu.label": "Menú Inicio",
+  "startMenu.user": "Invitado",
+  "startMenu.help": "Ayuda",
+  "startMenu.logOff": "Cerrar sesión",
+
+  "window.minimize": "Minimizar",
+  "window.maximize": "Maximizar",
+  "window.restore": "Restaurar",
+  "window.close": "Cerrar",
+
+  "explorer.back": "Atrás",
+  "explorer.forward": "Adelante",
+  "explorer.address": "Dirección",
+  "explorer.taskPane": "Panel de tareas",
+  "explorer.projectCount.one": "{count} proyecto",
+  "explorer.projectCount.other": "{count} proyectos",
+  "explorer.categoryCount.one": "{count} categoría",
+  "explorer.categoryCount.other": "{count} categorías",
+
+  "about.online": "En línea",
+
+  "projects.technologies": "Tecnologías",
+  "projects.github": "GitHub",
+  "projects.demo": "Demo",
+  "projects.caseStudy": "Caso de estudio",
+  "projects.galleryEmpty": "Sin capturas",
+  "projects.galleryPrevious": "Imagen anterior",
+  "projects.galleryNext": "Imagen siguiente",
+  "projects.galleryPosition": "Imagen {current} de {total}",
+  "projects.restricted": "Proyecto de empleador o cliente: sin capturas por confidencialidad",
+
+  "experience.work": "Experiencia laboral",
+  "experience.education": "Educación",
+  "experience.role": "Cargo",
+  "experience.company": "Empresa",
+  "experience.degree": "Formación",
+  "experience.institution": "Institución",
+  "experience.period": "Período",
+  "experience.location": "Ubicación",
+  "experience.periodWithDuration": "{range} ({duration})",
+
+  "dates.present": "Presente",
+
+  "contact.to": "Para",
+  "contact.name": "Nombre",
+  "contact.email": "Correo electrónico",
+  "contact.subject": "Asunto (opcional)",
+  "contact.message": "Mensaje",
+  "contact.send": "Enviar",
+  "contact.required": "Completa este campo.",
+  "contact.invalidEmail": "Escribe un correo electrónico válido.",
+  "contact.readyTitle": "Mensaje listo",
+  "contact.readyBody": "Tu programa de correo se abrió con el mensaje listo para enviar.",
+
+  "messenger.available": "Disponible",
+  "messenger.you": "Tú",
+  "messenger.typing": "{name} está escribiendo…",
+  "messenger.history": "Conversación",
+  "messenger.questions": "Preguntas sugeridas",
+
+  "assistant.label": "Asistente",
+  "assistant.close": "Cerrar mensaje",
+  "assistant.dontShowAgain": "No mostrar más",
+
+  "recycleBin.empty": "La papelera está vacía",
+
+  "controlPanel.language": "Idioma",
+  "controlPanel.assistant": "Asistente activado",
+  "controlPanel.reduceMotion": "Reducir animaciones",
+  "controlPanel.reset": "Restablecer escritorio",
+  "controlPanel.resetConfirm": "Se borrarán las preferencias guardadas en este navegador. ¿Continuar?",
+
+  "dialog.ok": "Aceptar",
+  "dialog.cancel": "Cancelar"
+}

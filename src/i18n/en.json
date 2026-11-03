@@ -1,0 +1,111 @@
+{
+  "language.name": "English",
+  "language.code": "EN",
+
+  "welcome.instruction": "To begin, click your user name",
+  "welcome.account": "Guest · English",
+  "welcome.accounts": "User accounts",
+
+  "desktop.label": "Desktop",
+
+  "apps.about.title": "About me",
+  "apps.about.subtitle": "Get to know me",
+  "apps.projects.title": "Projects",
+  "apps.projects.subtitle": "Explore my work",
+  "apps.skills.title": "Skills",
+  "apps.skills.subtitle": "My toolbox",
+  "apps.experience.title": "Experience",
+  "apps.experience.subtitle": "Experience and education",
+  "apps.contact.title": "Contact",
+  "apps.contact.subtitle": "Let's talk",
+  "apps.messenger.title": "Messenger",
+  "apps.messenger.subtitle": "A welcome message",
+  "apps.recycle-bin.title": "Recycle Bin",
+  "apps.control-panel.title": "Control Panel",
+
+  "actions.downloadCv": "Download CV",
+
+  "taskbar.label": "Taskbar",
+  "taskbar.start": "start",
+  "taskbar.windows": "Open windows",
+
+  "tray.label": "Notification area",
+  "tray.language": "Language: {current}. Switch to {next}",
+  "tray.assistantShow": "Show assistant",
+  "tray.assistantHide": "Hide assistant",
+
+  "startMenu.label": "Start menu",
+  "startMenu.user": "Guest",
+  "startMenu.help": "Help",
+  "startMenu.logOff": "Log off",
+
+  "window.minimize": "Minimize",
+  "window.maximize": "Maximize",
+  "window.restore": "Restore",
+  "window.close": "Close",
+
+  "explorer.back": "Back",
+  "explorer.forward": "Forward",
+  "explorer.address": "Address",
+  "explorer.taskPane": "Task pane",
+  "explorer.projectCount.one": "{count} project",
+  "explorer.projectCount.other": "{count} projects",
+  "explorer.categoryCount.one": "{count} category",
+  "explorer.categoryCount.other": "{count} categories",
+
+  "about.online": "Online",
+
+  "projects.technologies": "Technologies",
+  "projects.github": "GitHub",
+  "projects.demo": "Demo",
+  "projects.caseStudy": "Case study",
+  "projects.galleryEmpty": "No screenshots",
+  "projects.galleryPrevious": "Previous image",
+  "projects.galleryNext": "Next image",
+  "projects.galleryPosition": "Image {current} of {total}",
+  "projects.restricted": "Employer or client project: no screenshots, for confidentiality",
+
+  "experience.work": "Work experience",
+  "experience.education": "Education",
+  "experience.role": "Position",
+  "experience.company": "Company",
+  "experience.degree": "Degree",
+  "experience.institution": "Institution",
+  "experience.period": "Period",
+  "experience.location": "Location",
+  "experience.periodWithDuration": "{range} ({duration})",
+
+  "dates.present": "Present",
+
+  "contact.to": "To",
+  "contact.name": "Name",
+  "contact.email": "Email",
+  "contact.subject": "Subject (optional)",
+  "contact.message": "Message",
+  "contact.send": "Send",
+  "contact.required": "Fill in this field.",
+  "contact.invalidEmail": "Enter a valid email address.",
+  "contact.readyTitle": "Message ready",
+  "contact.readyBody": "Your email app opened with the message ready to send.",
+
+  "messenger.available": "Available",
+  "messenger.you": "You",
+  "messenger.typing": "{name} is typing…",
+  "messenger.history": "Conversation",
+  "messenger.questions": "Suggested questions",
+
+  "assistant.label": "Assistant",
+  "assistant.close": "Close message",
+  "assistant.dontShowAgain": "Don't show again",
+
+  "recycleBin.empty": "The Recycle Bin is empty",
+
+  "controlPanel.language": "Language",
+  "controlPanel.assistant": "Assistant enabled",
+  "controlPanel.reduceMotion": "Reduce animations",
+  "controlPanel.reset": "Reset desktop",
+  "controlPanel.resetConfirm": "This clears the preferences saved in this browser. Continue?",
+
+  "dialog.ok": "OK",
+  "dialog.cancel": "Cancel"
+}

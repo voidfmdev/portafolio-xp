@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { formatDuration, formatIsoDate, formatPeriod, isIsoDate } from './dates'
+import {
+  formatClockTime,
+  formatDuration,
+  formatFullDate,
+  formatIsoDate,
+  formatPeriod,
+  isIsoDate,
+} from './dates'
 
 // Spanish month abbreviations gained or lost a trailing dot across CLDR
 // releases, so those assertions tolerate both.
@@ -105,5 +112,32 @@ describe('formatPeriod', () => {
     expect(() => formatPeriod('2024-05', '2024-01', 'es', 'Presente')).toThrow(
       RangeError,
     )
+  })
+})
+
+// Dates built from local parts, so the visitor's time zone gives back the same clock.
+// Intl may separate "PM" with a narrow no-break space, hence `\s`.
+describe('formatClockTime', () => {
+  it('uses 24-hour time in Spanish', () => {
+    expect(formatClockTime(new Date(2026, 10, 3, 9, 5), 'es')).toBe('09:05')
+    expect(formatClockTime(new Date(2026, 10, 3, 14, 5), 'es')).toBe('14:05')
+    expect(formatClockTime(new Date(2026, 10, 3, 0, 0), 'es')).toBe('00:00')
+  })
+
+  it('uses 12-hour time in English', () => {
+    expect(formatClockTime(new Date(2026, 10, 3, 9, 5), 'en')).toMatch(
+      /^9:05\sAM$/,
+    )
+    expect(formatClockTime(new Date(2026, 10, 3, 14, 5), 'en')).toMatch(
+      /^2:05\sPM$/,
+    )
+  })
+})
+
+describe('formatFullDate', () => {
+  it('writes the weekday and the full date per language', () => {
+    const date = new Date(2026, 10, 3, 14, 5)
+    expect(formatFullDate(date, 'es')).toBe('martes, 3 de noviembre de 2026')
+    expect(formatFullDate(date, 'en')).toBe('Tuesday, November 3, 2026')
   })
 })

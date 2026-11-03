@@ -1,4 +1,5 @@
-import { LOCALES, type Lang } from '../i18n/locales'
+// Loaded by vite.config.ts through the content schemas: imports carry extensions.
+import { LOCALES, type Lang } from '../i18n/locales.ts'
 
 // Content dates are ISO months (`YYYY-MM`) or days (`YYYY-MM-DD`).
 const ISO_DATE = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/
@@ -72,6 +73,25 @@ export function formatDuration(months: number, lang: Lang): string {
   ]
   return new Intl.ListFormat(locale, { type: 'unit', style: 'long' }).format(
     parts,
+  )
+}
+
+// The es-CL locale data writes "2:05 p. m."; the Spanish clock reads 24-hour "14:05".
+const HOUR_CYCLE: Record<Lang, 'h12' | 'h23'> = { es: 'h23', en: 'h12' }
+
+/** Taskbar clock and message times, in the visitor's time zone: "09:05" / "9:05 AM". */
+export function formatClockTime(date: Date, lang: Lang): string {
+  return new Intl.DateTimeFormat(LOCALES[lang], {
+    hour: 'numeric',
+    minute: '2-digit',
+    hourCycle: HOUR_CYCLE[lang],
+  }).format(date)
+}
+
+/** Clock tooltip, in the visitor's time zone: "martes, 3 de noviembre de 2026" / "Tuesday, November 3, 2026". */
+export function formatFullDate(date: Date, lang: Lang): string {
+  return new Intl.DateTimeFormat(LOCALES[lang], { dateStyle: 'full' }).format(
+    date,
   )
 }
 
