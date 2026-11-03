@@ -1,0 +1,106 @@
+/* Luna welcome screen: dark bands, a lighter middle with the logo on one side
+   and the accounts on the other. Account buttons reset XP.css's `button` rules. */
+
+.welcome {
+  display: grid;
+  grid-template-rows: var(--welcome-band-height) 1fr var(--welcome-band-height);
+  height: 100%;
+  background: var(--color-welcome-band);
+  color: var(--color-text-on-dark);
+}
+
+.band {
+  background: var(--color-welcome-band);
+}
+
+.middle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-7);
+  padding: var(--space-6);
+  border-block: var(--border-width) solid var(--color-welcome-divider);
+  background: linear-gradient(
+    var(--color-welcome-start),
+    var(--color-welcome-end)
+  );
+}
+
+.brand {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-5);
+  text-align: right;
+}
+
+.logo {
+  width: var(--logo-size);
+  height: var(--logo-size);
+}
+
+.instruction {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--font-size-heading);
+  font-weight: normal;
+}
+
+.divider {
+  align-self: stretch;
+  width: var(--border-width);
+  background: var(--color-welcome-divider);
+}
+
+.accounts {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-width: 0;
+  min-height: 0;
+  padding: var(--space-3) var(--space-6) var(--space-3) var(--space-3);
+  border: none;
+  border-radius: var(--radius-window);
+  background: none;
+  box-shadow: none;
+  font: inherit;
+  font-size: var(--font-size-heading);
+  color: inherit;
+  text-align: left;
+}
+
+.account:focus {
+  box-shadow: none;
+}
+
+.selected,
+.account:not(:disabled):hover,
+.account:not(:disabled):active {
+  box-shadow: none;
+  background: var(--color-selection);
+}
+
+.avatar {
+  flex: none;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border: var(--focus-ring-width) solid var(--color-text-on-dark);
+  border-radius: var(--radius-control);
+}
+
+.selected .avatar {
+  border-color: var(--color-focus-ring);
+}
