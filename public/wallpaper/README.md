@@ -1,1 +1,1 @@
-Fondo de escritorio propio en WebP con fallback (D11, spec §8.2).
+Fondo de escritorio propio en SVG: lago, volcán y colinas (D11, spec §8.2).

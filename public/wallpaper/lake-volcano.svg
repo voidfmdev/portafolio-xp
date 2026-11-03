@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1D5BC4"/>
+      <stop offset="0.6" stop-color="#6EA6E8"/>
+      <stop offset="1" stop-color="#CFE5FA"/>
+    </linearGradient>
+    <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6FA6E3"/>
+      <stop offset="1" stop-color="#1E4C99"/>
+    </linearGradient>
+    <linearGradient id="slope" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#71839F"/>
+      <stop offset="0.5" stop-color="#55667F"/>
+      <stop offset="1" stop-color="#3B4860"/>
+    </linearGradient>
+    <radialGradient id="sun">
+      <stop offset="0" stop-color="#FFFBE6"/>
+      <stop offset="0.35" stop-color="#FFF4C2" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FFF4C2" stop-opacity="0"/>
+    </radialGradient>
+    <path id="volcano" d="M560 600C760 520 900 380 985 232Q1020 220 1055 232C1140 380 1280 520 1480 600Z"/>
+    <clipPath id="volcano-clip"><use href="#volcano"/></clipPath>
+    <clipPath id="lake-clip"><rect y="600" width="1600" height="300"/></clipPath>
+  </defs>
+
+  <rect width="1600" height="600" fill="url(#sky)"/>
+  <circle cx="1240" cy="150" r="120" fill="url(#sun)"/>
+
+  <!-- Distant range -->
+  <path d="M0 600V545L90 512L170 530L270 470L350 498L440 462L520 505L600 488L700 530L1300 520L1360 478L1430 500L1500 470L1600 492V600Z" fill="#8DA6CF"/>
+  <path d="M200 600L330 420L350 412L370 420L500 600Z" fill="#7D95BF"/>
+  <path d="M300 462L330 420L350 412L370 420L398 460L380 452L362 466L344 452L326 468L312 456Z" fill="#EEF4FB"/>
+
+  <!-- Volcano with its snowcap -->
+  <use href="#volcano" fill="url(#slope)"/>
+  <g clip-path="url(#volcano-clip)">
+    <path d="M800 200H1240V338L1112 346L1094 330L1074 356L1054 334L1034 362L1014 336L994 358L974 332L954 352L934 330L800 340Z" fill="#F4F8FC"/>
+    <path d="M1030 228H1240V345L1112 346L1094 330L1074 356L1054 334L1040 352Z" fill="#D5E0EE"/>
+  </g>
+
+  <!-- Lake, far shore and reflection -->
+  <rect y="600" width="1600" height="300" fill="url(#lake)"/>
+  <g clip-path="url(#lake-clip)">
+    <use href="#volcano" transform="matrix(1 0 0 -1 0 1200)" fill="#2B4C86" opacity="0.3"/>
+  </g>
+  <path d="M0 604C400 594 1200 596 1600 602V614C1200 608 400 606 0 616Z" fill="#3F7F4E"/>
+  <g stroke="#CFE4FA" stroke-width="3" stroke-linecap="round" opacity="0.55">
+    <path d="M640 640h90M820 662h140M1060 648h110M900 700h80M1200 690h70M700 720h60"/>
+  </g>
+
+  <!-- Hills and trees on both shores -->
+  <path d="M0 640C140 618 280 630 400 672C480 700 540 760 580 900H0Z" fill="#4A9A50"/>
+  <path d="M0 730C160 700 300 730 420 820C450 845 470 875 480 900H0Z" fill="#2F7537"/>
+  <path d="M1600 628C1460 612 1310 650 1210 708C1130 755 1090 830 1070 900H1600Z" fill="#4A9A50"/>
+  <path d="M1600 720C1480 706 1370 750 1300 820C1275 845 1260 875 1255 900H1600Z" fill="#2F7537"/>
+  <g fill="#1F5A28">
+    <path d="M124 636L140 590L156 636Z"/>
+    <path d="M166 638L182 596L198 638Z"/>
+    <path d="M222 646L240 594L258 646Z"/>
+    <path d="M274 654L290 610L306 654Z"/>
+    <path d="M332 668L350 618L368 668Z"/>
+    <path d="M1246 694L1262 648L1278 694Z"/>
+    <path d="M1282 678L1300 626L1318 678Z"/>
+    <path d="M1330 664L1345 620L1360 664Z"/>
+    <path d="M1372 652L1392 594L1412 652Z"/>
+    <path d="M1424 644L1440 598L1456 644Z"/>
+    <path d="M1470 638L1488 588L1506 638Z"/>
+    <path d="M1520 636L1535 594L1550 636Z"/>
+    <path d="M1563 638L1580 590L1597 638Z"/>
+  </g>
+</svg>
