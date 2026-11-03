@@ -1,0 +1,17 @@
+/* Adjustments on top of XP.css so its controls follow the Luna tokens in tokens.css.
+   Loaded after XP.css and global.css; only XP.css selectors belong here,
+   component styles live in their own CSS Modules. */
+
+/* XP.css asks for its bundled fonts here; the build strips them (D18). */
+pre,
+pre *,
+input,
+label,
+textarea,
+select,
+option,
+ul.tree-view,
+.status-bar-field,
+button {
+  font-family: var(--font-ui);
+}

@@ -1,0 +1,20 @@
+/* Minimal reset and base typography. Every value comes from tokens.css. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+}

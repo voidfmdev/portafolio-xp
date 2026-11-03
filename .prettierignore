@@ -1,0 +1,7 @@
+dist
+coverage
+package-lock.json
+# Documentation is hand-formatted (Spanish prose and wide tables).
+*.md
+# Approved Luna tokens (D13): keep them byte-for-byte as approved.
+src/styles/tokens.css

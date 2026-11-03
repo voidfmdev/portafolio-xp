@@ -1,0 +1,54 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Deploy one push at a time and let an in-flight deployment finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run typecheck && npm run lint && npm run test
+
+      # Project sites are served from /<repo>/; a <user>.github.io repo is served from /.
+      - name: Resolve base path
+        env:
+          REPO: ${{ github.event.repository.name }}
+        run: |
+          if [[ "$REPO" == *.github.io ]]; then base=/; else base="/$REPO/"; fi
+          echo "VITE_BASE=$base" >> "$GITHUB_ENV"
+
+      - run: npm run build
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

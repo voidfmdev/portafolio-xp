@@ -1,0 +1,92 @@
+/* Portafolio XP — tokens Luna aprobados en Fase 1 (D13).
+   Única fuente de colores, tipografías y medidas. Ningún componente usa valores sueltos. */
+
+:root {
+  /* Tipografía */
+  --font-ui: Tahoma, Verdana, "Segoe UI", sans-serif;
+  --font-title: "Trebuchet MS", Tahoma, Verdana, sans-serif;
+  --font-size-base: 12px;
+  --font-size-title: 13px;
+  --font-size-heading: 20px;
+
+  /* Texto */
+  --color-text: #000000;
+  --color-text-muted: #5A5A5A;
+  --color-text-on-dark: #FFFFFF;
+  --color-link: #215DC6;
+  --color-link-hover: #0A4ED6;
+
+  /* Ventana (barra de título Luna) */
+  --color-title-start: #3D8BF5;
+  --color-title-mid: #0A4ED6;
+  --color-title-end: #0640B0;
+  --color-title-shadow: #0A2E7A;
+  --color-window-frame: #0A4ED6;
+  --color-window-body: #FFFFFF;
+  --color-dialog: #ECE9D8;
+  --color-dialog-border: #D4D0C8;
+  --color-field-border: #7F9DB9;
+
+  /* Botones de título */
+  --color-btn-title-start: #5A9DF5;
+  --color-btn-title-end: #2561D9;
+  --color-close-start: #E8744F;
+  --color-close-mid: #D9442E;
+  --color-close-end: #B83221;
+
+  /* Barra de tareas y bandeja */
+  --color-taskbar-start: #3168D5;
+  --color-taskbar-mid: #245EDC;
+  --color-taskbar-end: #1C45A8;
+  --color-taskbar-border: #0F2E7A;
+  --color-taskbtn-start: #3F7BE0;
+  --color-taskbtn-end: #2458C8;
+  --color-tray-start: #1A9BE8;
+  --color-tray-end: #0F7BD0;
+
+  /* Botón Inicio */
+  --color-start-top: #4FB04E;
+  --color-start-mid: #3F9B41;
+  --color-start-end: #2E7A30;
+
+  /* Panel de tareas del Explorador */
+  --color-taskpane-start: #7BA3E8;
+  --color-taskpane-end: #5E79D9;
+  --color-taskpane-section: #D6DFF7;
+  --color-taskpane-header-start: #FFFFFF;
+  --color-taskpane-header-end: #C6D3F7;
+  --color-taskpane-title: #215DC6;
+
+  /* Selección y foco */
+  --color-selection: #316AC5;
+  --color-focus-ring: #FFBF47;
+
+  /* Globo del asistente */
+  --color-balloon: #FFFFE1;
+  --color-balloon-border: #000000;
+
+  /* Medidas */
+  --taskbar-height: 30px;
+  --titlebar-height: 30px;
+  --toolbar-height: 36px;
+  --addressbar-height: 30px;
+  --statusbar-height: 24px;
+  --taskpane-width: 210px;
+  --desktop-icon-size: 48px;
+  --desktop-icon-cell: 92px;
+  --radius-window: 8px;
+  --radius-control: 3px;
+  --shadow-window: 0 4px 14px rgba(0, 0, 0, 0.35);
+  --breakpoint-mobile: 768px;
+}
+
+:root {
+  --motion-duration: 160ms;
+}
+
+/* Debe ir después del valor por defecto: misma especificidad, gana la última. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration: 0ms;
+  }
+}
