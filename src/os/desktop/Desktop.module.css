@@ -1,0 +1,42 @@
+/* Desktop area above the taskbar. Windows are positioned inside it; `isolation`
+   keeps their z-index below the taskbar and the Start menu. */
+
+.desktop {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--color-title-mid) url('/wallpaper/lake-volcano.svg') center /
+    cover no-repeat;
+}
+
+/* The desktop only takes the focus so the next Tab reaches the first icon. */
+.desktop:focus {
+  outline: none;
+}
+
+.left,
+.right {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  padding: var(--space-3);
+  list-style: none;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(auto-fill, var(--desktop-icon-cell));
+  grid-auto-columns: var(--desktop-icon-cell);
+  gap: var(--space-2);
+  align-content: start;
+}
+
+/* Icons wrap into a new column when the desktop is too short for them. */
+.left {
+  left: 0;
+  bottom: 0;
+}
+
+.right {
+  right: 0;
+}

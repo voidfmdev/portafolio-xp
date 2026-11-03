@@ -1,0 +1,142 @@
+/* Two-column Luna Start menu, opened above the Start button. Its items reset
+   XP.css's `button` rules; hover, pressed and focus states need the longer selectors. */
+
+.startMenu {
+  position: absolute;
+  left: 0;
+  bottom: var(--taskbar-height);
+  display: flex;
+  flex-direction: column;
+  width: var(--start-menu-width);
+  max-width: 100%;
+  overflow: hidden;
+  border: var(--border-width) solid var(--color-window-frame);
+  border-radius: var(--radius-window) var(--radius-window) 0 0;
+  box-shadow: var(--shadow-window);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: linear-gradient(
+    var(--color-title-start),
+    var(--color-title-mid),
+    var(--color-title-end)
+  );
+  color: var(--color-text-on-dark);
+  font-family: var(--font-title);
+  font-size: var(--font-size-title);
+  font-weight: bold;
+  text-shadow: var(--border-width) var(--border-width) var(--color-title-shadow);
+}
+
+.avatar {
+  flex: none;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border: var(--focus-ring-width) solid var(--color-text-on-dark);
+  border-radius: var(--radius-control);
+}
+
+/* The sections column fits its longest subtitle; the places take the rest. */
+.columns {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.programs,
+.places {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-2) 0;
+}
+
+.programs {
+  background: var(--color-window-body);
+}
+
+.places {
+  border-left: var(--border-width) solid var(--color-taskpane-header-end);
+  background: var(--color-taskpane-section);
+}
+
+.item,
+.footerItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  min-height: 0;
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+}
+
+.item {
+  color: var(--color-text);
+}
+
+.item:focus,
+.item:not(:disabled):hover,
+.item:not(:disabled):active {
+  box-shadow: none;
+  background: var(--color-selection);
+  color: var(--color-text-on-dark);
+}
+
+.itemIcon {
+  flex: none;
+  width: var(--icon-size-medium);
+  height: var(--icon-size-medium);
+}
+
+.itemText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.itemTitle {
+  font-weight: bold;
+}
+
+.itemSubtitle {
+  color: var(--color-text-muted);
+}
+
+.item:focus .itemSubtitle,
+.item:hover .itemSubtitle {
+  color: inherit;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--space-2) var(--space-3);
+  background: linear-gradient(var(--color-title-mid), var(--color-title-end));
+}
+
+.footerItem {
+  border-radius: var(--radius-control);
+  color: var(--color-text-on-dark);
+}
+
+.footerItem:focus,
+.footerItem:not(:disabled):hover,
+.footerItem:not(:disabled):active {
+  box-shadow: none;
+  background: var(--color-title-start);
+}
+
+.footerIcon {
+  flex: none;
+  width: var(--icon-size-medium);
+  height: var(--icon-size-medium);
+}

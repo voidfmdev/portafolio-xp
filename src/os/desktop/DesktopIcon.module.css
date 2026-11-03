@@ -1,0 +1,49 @@
+/* Desktop icons are buttons, but not XP push buttons: the reset beats XP.css's
+   `button` rules, and its hover, pressed and focus states need the longer selectors. */
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  width: var(--desktop-icon-cell);
+  min-width: 0;
+  min-height: 0;
+  padding: var(--space-2);
+  border: none;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font: inherit;
+  color: var(--color-text-on-dark);
+  cursor: default;
+}
+
+.icon:focus,
+.icon:not(:disabled):hover,
+.icon:not(:disabled):active {
+  background: none;
+  box-shadow: none;
+}
+
+.image {
+  flex: none;
+  width: var(--desktop-icon-size);
+  height: var(--desktop-icon-size);
+}
+
+.label {
+  padding: 0 var(--space-1);
+  text-align: center;
+  text-shadow: var(--shadow-text-on-desktop);
+  overflow-wrap: anywhere;
+}
+
+.selected .label {
+  background: var(--color-selection);
+  text-shadow: none;
+}
+
+.selected .image {
+  filter: drop-shadow(0 0 var(--space-1) var(--color-selection));
+}

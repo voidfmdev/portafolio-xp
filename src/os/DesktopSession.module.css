@@ -1,0 +1,20 @@
+.session {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Short fade from the welcome screen (spec §4.1). */
+@media (prefers-reduced-motion: no-preference) {
+  .session {
+    animation: enter var(--motion-duration) ease-out;
+  }
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+  }
+}

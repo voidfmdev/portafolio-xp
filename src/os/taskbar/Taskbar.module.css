@@ -1,0 +1,167 @@
+/* Luna taskbar. Its buttons are not XP push buttons: each one resets XP.css's
+   `button` rules, and hover, pressed and focus states need the longer selectors. */
+
+.taskbar {
+  flex: none;
+  display: flex;
+  align-items: stretch;
+  height: var(--taskbar-height);
+  border-top: var(--border-width) solid var(--color-taskbar-border);
+  background: linear-gradient(
+    var(--color-taskbar-start),
+    var(--color-taskbar-mid),
+    var(--color-taskbar-end)
+  );
+  color: var(--color-text-on-dark);
+}
+
+.start,
+.windowButton,
+.trayButton {
+  min-width: 0;
+  min-height: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font: inherit;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Start button */
+
+.start {
+  flex: none;
+  padding: 0 var(--space-5) 0 var(--space-3);
+  border-radius: 0 var(--radius-window) var(--radius-window) 0;
+  background: linear-gradient(
+    var(--color-start-top),
+    var(--color-start-mid),
+    var(--color-start-end)
+  );
+  font-family: var(--font-title);
+  font-size: var(--font-size-heading);
+  font-style: italic;
+  font-weight: bold;
+  text-shadow: var(--border-width) var(--border-width) var(--color-start-end);
+}
+
+.start:focus {
+  box-shadow: none;
+}
+
+.start:not(:disabled):hover {
+  box-shadow: none;
+  background: linear-gradient(
+    var(--color-start-top),
+    var(--color-start-top),
+    var(--color-start-mid)
+  );
+}
+
+.start[aria-expanded='true'],
+.start:not(:disabled):active {
+  box-shadow: none;
+  background: linear-gradient(var(--color-start-end), var(--color-start-mid));
+}
+
+.startLogo {
+  flex: none;
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+}
+
+/* Window buttons */
+
+.windows {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: var(--space-1);
+  margin: 0;
+  padding: var(--space-1) var(--space-2);
+  list-style: none;
+}
+
+.windowItem {
+  flex: 0 1 var(--taskbar-button-width);
+  min-width: 0;
+}
+
+.windowButton {
+  width: 100%;
+  height: 100%;
+  padding: 0 var(--space-3);
+  border: var(--border-width) solid var(--color-taskbar-border);
+  border-radius: var(--radius-control);
+  background: linear-gradient(
+    var(--color-taskbtn-start),
+    var(--color-taskbtn-end)
+  );
+}
+
+.windowButton:focus {
+  box-shadow: none;
+}
+
+.windowButton:not(:disabled):hover {
+  box-shadow: none;
+  background: var(--color-taskbtn-start);
+}
+
+.windowButton[aria-pressed='true'],
+.windowButton:not(:disabled):active {
+  box-shadow: none;
+  background: linear-gradient(
+    var(--color-taskbar-end),
+    var(--color-taskbtn-end)
+  );
+}
+
+.windowIcon {
+  flex: none;
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+}
+
+.windowTitle {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Tray */
+
+.tray {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-3);
+  border-left: var(--border-width) solid var(--color-taskbar-border);
+  background: linear-gradient(var(--color-tray-start), var(--color-tray-end));
+}
+
+.trayButton {
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-control);
+  font-weight: bold;
+}
+
+.trayButton:focus {
+  box-shadow: none;
+}
+
+.trayButton:not(:disabled):hover,
+.trayButton:not(:disabled):active {
+  box-shadow: none;
+  background: var(--color-taskbtn-end);
+}
+
+.trayIcon {
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+}

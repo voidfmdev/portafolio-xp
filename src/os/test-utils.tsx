@@ -1,0 +1,30 @@
+import { render } from '@testing-library/react'
+import { I18nProvider } from '../i18n/I18nProvider'
+import { LANG_STORAGE_KEY } from '../i18n/initialLang'
+import type { Lang } from '../i18n/locales'
+import { storage } from '../lib/storage'
+import { DesktopSession } from './DesktopSession'
+import type { Route } from './routes'
+import { WindowManagerProvider } from './window-manager/WindowManagerProvider'
+
+interface SessionOptions {
+  lang?: Lang
+  initialApps?: readonly Route[]
+  onLogOff?: () => void
+}
+
+/** Renders a signed-in desktop session, in Spanish unless told otherwise. */
+export function renderSession({
+  lang = 'es',
+  initialApps = [],
+  onLogOff = () => {},
+}: SessionOptions = {}) {
+  storage.set(LANG_STORAGE_KEY, lang)
+  return render(
+    <I18nProvider>
+      <WindowManagerProvider initialApps={initialApps}>
+        <DesktopSession onLogOff={onLogOff} />
+      </WindowManagerProvider>
+    </I18nProvider>,
+  )
+}

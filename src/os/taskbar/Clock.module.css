@@ -1,0 +1,5 @@
+.clock {
+  padding-inline: var(--space-2);
+  white-space: nowrap;
+  cursor: default;
+}
