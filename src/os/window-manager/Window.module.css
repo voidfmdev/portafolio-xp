@@ -1,0 +1,69 @@
+/* Placement and states of a window. The Luna frame and title bar of every
+   `.window` live in xp-overrides.css. */
+
+.window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* The window itself takes the focus when it opens; the active title bar already shows it. */
+.window:focus {
+  outline: none;
+}
+
+.inactive {
+  box-shadow:
+    inset 0 0 0 var(--window-border-width) var(--color-title-inactive-end),
+    var(--shadow-window);
+}
+
+.inactive .titleBar {
+  background: linear-gradient(
+    var(--color-title-inactive-start),
+    var(--color-title-inactive-end)
+  );
+}
+
+.maximized {
+  inset: 0;
+}
+
+.maximized,
+.maximized .titleBar {
+  border-radius: 0;
+}
+
+.titleBar {
+  flex: none;
+  gap: var(--space-2);
+  user-select: none;
+  /* Dragging with touch must not scroll the page. */
+  touch-action: none;
+}
+
+.titleIcon {
+  flex: none;
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+}
+
+.title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: inherit;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+  overflow: auto;
+  background: var(--color-window-body);
+}
