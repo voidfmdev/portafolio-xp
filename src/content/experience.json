@@ -1,0 +1,36 @@
+{
+  "work": [
+    {
+      "id": "trabajo-1",
+      "role": { "es": "[RELLENO] Cargo 1", "en": "[RELLENO] Position 1" },
+      "company": "[RELLENO] Empresa 1",
+      "start": "2000-01",
+      "end": null,
+      "location": { "es": "[RELLENO] Remoto", "en": "[RELLENO] Remote" }
+    },
+    {
+      "id": "trabajo-2",
+      "role": { "es": "[RELLENO] Cargo 2", "en": "[RELLENO] Position 2" },
+      "company": "[RELLENO] Empresa 2",
+      "start": "2000-01-15",
+      "end": "2000-04-30",
+      "location": {
+        "es": "[RELLENO] Ciudad, país",
+        "en": "[RELLENO] City, country"
+      }
+    }
+  ],
+  "education": [
+    {
+      "id": "estudios-1",
+      "degree": { "es": "[RELLENO] Título 1", "en": "[RELLENO] Degree 1" },
+      "institution": "[RELLENO] Institución 1",
+      "start": "2000-03",
+      "end": "2000-12",
+      "location": {
+        "es": "[RELLENO] Ciudad, país",
+        "en": "[RELLENO] City, country"
+      }
+    }
+  ]
+}

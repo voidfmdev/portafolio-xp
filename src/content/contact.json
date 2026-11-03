@@ -1,0 +1,17 @@
+{
+  "email": "<correo>",
+  "links": [
+    {
+      "id": "github",
+      "label": "GitHub",
+      "url": "https://github.com/<usuario-github>",
+      "icon": "github"
+    },
+    {
+      "id": "linkedin",
+      "label": "LinkedIn",
+      "url": "<linkedin>",
+      "icon": "linkedin"
+    }
+  ]
+}

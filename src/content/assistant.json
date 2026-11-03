@@ -1,0 +1,60 @@
+{
+  "firstVisit": {
+    "es": "[RELLENO] Comentario de la primera visita.",
+    "en": "[RELLENO] First visit comment."
+  },
+  "windowOpened": {
+    "about": {
+      "es": "[RELLENO] Comentario al abrir Sobre mí.",
+      "en": "[RELLENO] Comment when opening About me."
+    },
+    "projects": {
+      "es": "[RELLENO] Comentario al abrir Proyectos.",
+      "en": "[RELLENO] Comment when opening Projects."
+    },
+    "skills": {
+      "es": "[RELLENO] Comentario al abrir Habilidades.",
+      "en": "[RELLENO] Comment when opening Skills."
+    },
+    "experience": {
+      "es": "[RELLENO] Comentario al abrir Experiencia.",
+      "en": "[RELLENO] Comment when opening Experience."
+    },
+    "contact": {
+      "es": "[RELLENO] Comentario al abrir Contacto.",
+      "en": "[RELLENO] Comment when opening Contact."
+    },
+    "messenger": {
+      "es": "[RELLENO] Comentario al abrir Messenger.",
+      "en": "[RELLENO] Comment when opening Messenger."
+    },
+    "recycle-bin": {
+      "es": "[RELLENO] Comentario al abrir la Papelera de reciclaje.",
+      "en": "[RELLENO] Comment when opening the Recycle Bin."
+    },
+    "control-panel": {
+      "es": "[RELLENO] Comentario al abrir el Panel de control.",
+      "en": "[RELLENO] Comment when opening the Control Panel."
+    }
+  },
+  "idle": {
+    "es": "[RELLENO] Comentario tras un rato sin actividad.",
+    "en": "[RELLENO] Comment after a while without activity."
+  },
+  "allWindowsClosed": {
+    "es": "[RELLENO] Comentario al cerrar todas las ventanas.",
+    "en": "[RELLENO] Comment when every window is closed."
+  },
+  "languageChanged": {
+    "es": "[RELLENO] Comentario al cambiar al español.",
+    "en": "[RELLENO] Comment when switching to English."
+  },
+  "mobileDragAttempt": {
+    "es": "[RELLENO] Comentario al intentar arrastrar en el celular.",
+    "en": "[RELLENO] Comment when trying to drag on a phone."
+  },
+  "help": {
+    "es": "[RELLENO] Instrucciones de uso del escritorio.",
+    "en": "[RELLENO] How to use the desktop."
+  }
+}

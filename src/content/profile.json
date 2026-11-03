@@ -1,0 +1,47 @@
+{
+  "name": "<nombre>",
+  "alias": "<alias>",
+  "photo": {
+    "src": "<foto>",
+    "alt": { "es": "[RELLENO] Foto de perfil", "en": "[RELLENO] Profile photo" }
+  },
+  "role": { "es": "[RELLENO] Línea de rol", "en": "[RELLENO] Role line" },
+  "location": {
+    "es": "[RELLENO] Ciudad, país",
+    "en": "[RELLENO] City, country"
+  },
+  "pageTitle": {
+    "es": "[RELLENO] Título de la página",
+    "en": "[RELLENO] Page title"
+  },
+  "breadcrumb": { "es": "[RELLENO] Ficha", "en": "[RELLENO] Profile" },
+  "sections": [
+    {
+      "id": "seccion-1",
+      "title": { "es": "[RELLENO] Sección 1", "en": "[RELLENO] Section 1" },
+      "body": {
+        "es": "[RELLENO] Texto de la sección 1.",
+        "en": "[RELLENO] Section 1 text."
+      }
+    },
+    {
+      "id": "seccion-2",
+      "title": { "es": "[RELLENO] Sección 2", "en": "[RELLENO] Section 2" },
+      "body": {
+        "es": "[RELLENO] Texto de la sección 2.",
+        "en": "[RELLENO] Section 2 text."
+      }
+    }
+  ],
+  "cv": { "es": "cv/<alias>-cv-es.pdf", "en": "cv/<alias>-cv-en.pdf" },
+  "site": {
+    "title": {
+      "es": "[RELLENO] <nombre> · Portafolio",
+      "en": "[RELLENO] <nombre> · Portfolio"
+    },
+    "description": {
+      "es": "[RELLENO] Descripción del sitio para buscadores y redes sociales.",
+      "en": "[RELLENO] Site description for search engines and social networks."
+    }
+  }
+}

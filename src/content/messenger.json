@@ -1,0 +1,105 @@
+{
+  "header": {
+    "name": "[RELLENO] Asistente",
+    "personalMessage": {
+      "es": "[RELLENO] Mensaje personal",
+      "en": "[RELLENO] Personal message"
+    }
+  },
+  "greeting": {
+    "es": "[RELLENO] Saludo inicial.",
+    "en": "[RELLENO] Opening greeting."
+  },
+  "start": ["quien-eres", "proyectos", "habilidades", "contacto"],
+  "questions": [
+    {
+      "id": "quien-eres",
+      "label": { "es": "¿Quién eres?", "en": "Who are you?" },
+      "answer": {
+        "es": "[RELLENO] Respuesta sobre quién soy.",
+        "en": "[RELLENO] Answer about who I am."
+      },
+      "actions": [
+        {
+          "type": "openWindow",
+          "app": "about",
+          "label": {
+            "es": "[RELLENO] Abrir Sobre mí",
+            "en": "[RELLENO] Open About me"
+          }
+        }
+      ]
+    },
+    {
+      "id": "proyectos",
+      "label": {
+        "es": "¿Qué proyectos has creado?",
+        "en": "What projects have you built?"
+      },
+      "answer": {
+        "es": "[RELLENO] Respuesta sobre los proyectos.",
+        "en": "[RELLENO] Answer about the projects."
+      },
+      "actions": [
+        {
+          "type": "openWindow",
+          "app": "projects",
+          "target": "proyecto-1",
+          "label": {
+            "es": "[RELLENO] Ver el proyecto 1",
+            "en": "[RELLENO] See project 1"
+          }
+        }
+      ],
+      "followUps": ["habilidades", "contacto"]
+    },
+    {
+      "id": "habilidades",
+      "label": {
+        "es": "¿Cuáles son tus habilidades?",
+        "en": "What are your skills?"
+      },
+      "answer": {
+        "es": "[RELLENO] Respuesta sobre las habilidades.",
+        "en": "[RELLENO] Answer about the skills."
+      },
+      "actions": [
+        {
+          "type": "openWindow",
+          "app": "skills",
+          "target": "lenguajes-de-programacion",
+          "label": {
+            "es": "[RELLENO] Ver los lenguajes",
+            "en": "[RELLENO] See the languages"
+          }
+        }
+      ]
+    },
+    {
+      "id": "contacto",
+      "label": {
+        "es": "¿Cómo puedo contactarte?",
+        "en": "How can I contact you?"
+      },
+      "answer": {
+        "es": "[RELLENO] Respuesta sobre el contacto.",
+        "en": "[RELLENO] Answer about getting in touch."
+      },
+      "actions": [
+        {
+          "type": "openWindow",
+          "app": "contact",
+          "label": {
+            "es": "[RELLENO] Escribir un mensaje",
+            "en": "[RELLENO] Write a message"
+          }
+        },
+        {
+          "type": "externalLink",
+          "url": "<linkedin>",
+          "label": { "es": "[RELLENO] LinkedIn", "en": "[RELLENO] LinkedIn" }
+        }
+      ]
+    }
+  ]
+}

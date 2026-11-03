@@ -1,0 +1,40 @@
+{
+  "projects": [
+    {
+      "slug": "proyecto-1",
+      "name": "[RELLENO] Proyecto 1",
+      "year": 2000,
+      "role": { "es": "[RELLENO] Rol", "en": "[RELLENO] Role" },
+      "summary": {
+        "es": "[RELLENO] Resumen del proyecto 1.",
+        "en": "[RELLENO] Project 1 summary."
+      },
+      "description": {
+        "es": "[RELLENO] Descripción del proyecto 1.",
+        "en": "[RELLENO] Project 1 description."
+      },
+      "tech": ["[RELLENO] Tech A", "[RELLENO] Tech B"],
+      "links": { "github": "https://github.com/<usuario-github>" },
+      "images": [],
+      "visibility": "public"
+    },
+    {
+      "slug": "proyecto-2",
+      "name": { "es": "[RELLENO] Proyecto 2", "en": "[RELLENO] Project 2" },
+      "year": 2000,
+      "role": { "es": "[RELLENO] Rol", "en": "[RELLENO] Role" },
+      "summary": {
+        "es": "[RELLENO] Resumen del proyecto 2, de un empleador o cliente.",
+        "en": "[RELLENO] Project 2 summary, for an employer or client."
+      },
+      "description": {
+        "es": "[RELLENO] Problema, rol, stack y aprendizajes del proyecto 2.",
+        "en": "[RELLENO] Project 2 problem, role, stack and lessons learned."
+      },
+      "tech": ["[RELLENO] Tech C"],
+      "links": {},
+      "images": [],
+      "visibility": "restricted"
+    }
+  ]
+}

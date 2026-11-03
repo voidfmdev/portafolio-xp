@@ -1,0 +1,40 @@
+{
+  "categories": [
+    {
+      "id": "lenguajes-de-programacion",
+      "name": {
+        "es": "Lenguajes de programación",
+        "en": "Programming languages"
+      },
+      "description": {
+        "es": "[RELLENO] Descripción de la categoría.",
+        "en": "[RELLENO] Category description."
+      },
+      "items": [
+        {
+          "name": "[RELLENO] Lenguaje A",
+          "icon": "generic",
+          "level": { "es": "[RELLENO] Nivel", "en": "[RELLENO] Level" }
+        },
+        { "name": "[RELLENO] Lenguaje B", "icon": "generic" }
+      ]
+    },
+    {
+      "id": "habilidades-blandas",
+      "name": { "es": "Habilidades blandas", "en": "Soft skills" },
+      "description": {
+        "es": "[RELLENO] Descripción de la categoría.",
+        "en": "[RELLENO] Category description."
+      },
+      "items": [
+        {
+          "name": {
+            "es": "[RELLENO] Habilidad blanda",
+            "en": "[RELLENO] Soft skill"
+          },
+          "icon": "generic"
+        }
+      ]
+    }
+  ]
+}
