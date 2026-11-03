@@ -199,7 +199,8 @@ Ejemplo mínimo:
 
 - Un esquema Zod por archivo y los tipos de TypeScript derivados de ellos (`z.infer`), así el código y el JSON no se separan.
 - Comprobaciones entre archivos: `target` de Messenger, unicidad de slugs e ids.
-- Se ejecuta en `npm run test` y en `npm run build`; un JSON inválido corta el build con el archivo y la ruta del campo.
+- Se ejecuta en `npm run test` y en `npm run build`; un JSON inválido corta el build con el archivo y la ruta del campo (D26 [PE]).
+- Un campo que no está en el esquema es un error, para que un nombre mal escrito no se ignore en silencio (D26 [PE]).
 - Paridad (D20): todo `Text`, incluido el de un `Name` bilingüe, tiene `es` y `en` no vacíos.
 - Modo estricto (D21): con `CONTENT_STRICT=true`, el build falla si queda un marcador (`<…>` o `[RELLENO]`) en `Url`, `Email`, `AssetPath` o en cualquier texto (`Text`, `Name` y cadenas simples como `name` o `alias`). Se activa en el workflow de despliegue al cerrar la Fase 3; hasta entonces queda apagado y los marcadores se aceptan.
 
