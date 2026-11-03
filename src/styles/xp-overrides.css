@@ -15,3 +15,15 @@ ul.tree-view,
 button {
   font-family: var(--font-ui);
 }
+
+/* XP.css sets windows and controls to 11px; text must not go below the base token. */
+.window,
+input,
+label,
+textarea,
+select,
+option,
+ul.tree-view,
+button {
+  font-size: var(--font-size-base);
+}
