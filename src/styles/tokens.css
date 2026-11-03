@@ -90,3 +90,37 @@
     --motion-duration: 0ms;
   }
 }
+
+/* Espaciado (D27): márgenes, rellenos y separaciones de los componentes */
+:root {
+  --space-1: 2px;
+  --space-2: 4px;
+  --space-3: 8px;
+  --space-4: 12px;
+  --space-5: 16px;
+  --space-6: 24px;
+  --space-7: 32px;
+}
+
+/* Medidas del escritorio y alias de la paleta (D30) */
+:root {
+  --border-width: 1px;
+  --focus-ring-width: 2px;
+  --window-border-width: 3px;
+  --icon-size-small: 16px;
+  --icon-size-medium: 32px;
+  --avatar-size: 48px;
+  --logo-size: 96px;
+  --start-menu-width: 380px;
+  --taskbar-button-width: 160px;
+  --welcome-band-height: 80px;
+  --shadow-text-on-desktop: 1px 1px 2px rgba(0, 0, 0, 0.8);
+
+  /* Alias sobre colores de D13: superficies nuevas, sin colores nuevos */
+  --color-title-inactive-start: var(--color-taskpane-start);
+  --color-title-inactive-end: var(--color-taskpane-end);
+  --color-welcome-band: var(--color-taskbar-end);
+  --color-welcome-start: var(--color-taskpane-start);
+  --color-welcome-end: var(--color-taskpane-end);
+  --color-welcome-divider: var(--color-taskpane-section);
+}

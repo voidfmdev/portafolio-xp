@@ -27,3 +27,62 @@ ul.tree-view,
 button {
   font-size: var(--font-size-base);
 }
+
+/* XP.css draws a dotted outline on every focus, also on click, and none at all
+   in the title bar. Keyboard focus gets the Luna focus ring instead. */
+a:focus,
+button:focus,
+.title-bar-controls button:focus {
+  outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+.title-bar-controls button:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+}
+
+a {
+  color: var(--color-link);
+}
+
+a:hover {
+  color: var(--color-link-hover);
+}
+
+/* Window frame and title bar in the Luna tokens (D13); XP.css hardcodes its own blues.
+   The frame is an inset shadow, so the body stays inside it. */
+.window {
+  padding: 0 var(--window-border-width) var(--window-border-width);
+  border-radius: var(--radius-window) var(--radius-window) 0 0;
+  background: var(--color-dialog);
+  box-shadow:
+    inset 0 0 0 var(--window-border-width) var(--color-window-frame),
+    var(--shadow-window);
+}
+
+.title-bar {
+  height: var(--titlebar-height);
+  margin-inline: calc(-1 * var(--window-border-width));
+  padding: 0 var(--space-2) 0 var(--space-3);
+  border: none;
+  border-radius: var(--radius-window) var(--radius-window) 0 0;
+  background: linear-gradient(
+    var(--color-title-start),
+    var(--color-title-mid),
+    var(--color-title-end)
+  );
+  font-family: var(--font-title);
+  font-size: var(--font-size-title);
+  text-shadow: var(--border-width) var(--border-width) var(--color-title-shadow);
+}
+
+.title-bar-text {
+  color: var(--color-text-on-dark);
+}
+
+/* The buttons keep XP.css's images, picked by their English aria-label (D28).
+   The square fill behind those rounded images would show in their corners. */
+.title-bar-controls button {
+  background-color: transparent;
+}

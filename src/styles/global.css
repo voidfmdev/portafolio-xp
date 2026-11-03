@@ -17,4 +17,15 @@ body {
   font-family: var(--font-ui);
   font-size: var(--font-size-base);
   color: var(--color-text);
+  background: var(--color-welcome-band);
+}
+
+/* Components that set `display` must still hide with the `hidden` attribute. */
+[hidden] {
+  display: none !important;
+}
+
+/* Keyboard focus is always visible, in the Luna focus color. */
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
 }

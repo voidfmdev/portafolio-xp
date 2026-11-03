@@ -3,5 +3,5 @@ coverage
 package-lock.json
 # Documentation is hand-formatted (Spanish prose and wide tables).
 *.md
-# Approved Luna tokens (D13): keep them byte-for-byte as approved.
+# Luna tokens (D13, extended by D27 and D30): approved values stay byte-for-byte.
 src/styles/tokens.css
