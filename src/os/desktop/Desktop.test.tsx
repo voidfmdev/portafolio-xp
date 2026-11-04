@@ -66,11 +66,7 @@ describe('Desktop', () => {
     const open = vi.spyOn(window, 'open').mockReturnValue(null)
     renderSession()
     fireEvent.doubleClick(screen.getByRole('button', { name: 'Descargar CV' }))
-    expect(open).toHaveBeenCalledWith(
-      '/cv/<alias>-cv-es.pdf',
-      '_blank',
-      'noopener',
-    )
+    expect(open).toHaveBeenCalledWith('/cv/cv-es.pdf', '_blank', 'noopener')
   })
 
   it('names the icons in English when the language changes', () => {

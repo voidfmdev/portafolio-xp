@@ -16,7 +16,7 @@ Notación tipo TypeScript; `?` = opcional. El orden de cada lista es el orden en
 | `Slug` | `"mi-proyecto"` | `^[a-z0-9]+(-[a-z0-9]+)*$`, único en su lista; se usa en los enlaces `#/…` |
 | `Url` | `"https://…"` | URL absoluta `https:` |
 | `Email` | `"…@…"` | Correo válido |
-| `AssetPath` | `"cv/<alias>-cv-es.pdf"` | Ruta dentro de `public/`, sin `/` inicial, para que funcione con cualquier `base` (D15) |
+| `AssetPath` | `"cv/cv-es.pdf"` | Ruta dentro de `public/`, sin `/` inicial, para que funcione con cualquier `base` (D15) |
 | `Marker` | `"<correo>"` | Marcador `<…>` de la spec §3 (principio 5). Con el modo estricto apagado, `Url`, `Email` y `AssetPath` también aceptan un marcador; con el modo estricto encendido, no (§8, D21) |
 | `AppId` | `"about"` … | `about` · `projects` · `skills` · `experience` · `contact` · `messenger` · `recycle-bin` · `control-panel` |
 
@@ -40,7 +40,7 @@ Notación tipo TypeScript; `?` = opcional. El orden de cada lista es el orden en
     title: Text
     body: Text
   }>
-  cv: { es: AssetPath; en: AssetPath }   // "cv/<alias>-cv-es.pdf", "cv/<alias>-cv-en.pdf"
+  cv: { es: AssetPath; en: AssetPath }   // "cv/cv-es.pdf", "cv/cv-en.pdf" (D31)
   site: {                            // <title>, descripción y Open Graph de index.html (D24)
     title: Text
     description: Text

@@ -33,7 +33,7 @@
       }
     }
   ],
-  "cv": { "es": "cv/<alias>-cv-es.pdf", "en": "cv/<alias>-cv-en.pdf" },
+  "cv": { "es": "cv/cv-es.pdf", "en": "cv/cv-en.pdf" },
   "site": {
     "title": {
       "es": "[RELLENO] <nombre> · Portafolio",

@@ -110,7 +110,7 @@ describe('StartMenu', () => {
     fireEvent.click(start)
     expect(
       screen.getByRole('menuitem', { name: 'Download CV' }),
-    ).toHaveAttribute('href', '/cv/<alias>-cv-en.pdf')
+    ).toHaveAttribute('href', '/cv/cv-en.pdf')
   })
 
   it('shows the assistant from Help', () => {
