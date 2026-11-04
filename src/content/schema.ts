@@ -5,9 +5,7 @@ import { z } from 'zod'
 import { LANGS } from '../i18n/locales.ts'
 import { isIsoDate } from '../lib/dates.ts'
 import { APP_IDS } from '../os/appIds.ts'
-
-/** A whole-value placeholder such as `<correo>` (spec §3, principle 5). */
-const MARKER = /^<[a-z][a-z0-9-]*>$/
+import { MARKER } from './marker.ts'
 
 // Relative path inside public/: no leading slash, no `..` segment, no scheme, query or fragment.
 const ASSET_PATH = /^(?![/\\])(?!(?:.*\/)?\.\.(?:\/|$))[^\s\\:?#]+$/
