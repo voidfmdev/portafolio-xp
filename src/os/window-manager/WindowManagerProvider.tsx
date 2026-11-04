@@ -90,6 +90,10 @@ export function WindowManagerProvider({
     (id: AppId, position: Point) => dispatch({ type: 'move', id, position }),
     [],
   )
+  const navigateApp = useCallback(
+    (id: AppId, target?: string) => dispatch({ type: 'navigate', id, target }),
+    [],
+  )
 
   const value = useMemo(
     () => ({
@@ -102,6 +106,7 @@ export function WindowManagerProvider({
       restoreApp,
       focusApp,
       moveWindow,
+      navigateApp,
     }),
     [
       state,
@@ -112,6 +117,7 @@ export function WindowManagerProvider({
       restoreApp,
       focusApp,
       moveWindow,
+      navigateApp,
     ],
   )
 

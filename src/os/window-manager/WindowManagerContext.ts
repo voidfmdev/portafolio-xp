@@ -28,6 +28,8 @@ export interface WindowManagerValue {
   restoreApp: (id: AppId) => void
   focusApp: (id: AppId) => void
   moveWindow: (id: AppId, position: Point) => void
+  /** Shows another item inside an open window, without moving the focus. */
+  navigateApp: (id: AppId, target?: string) => void
 }
 
 export const WindowManagerContext = createContext<WindowManagerValue | null>(

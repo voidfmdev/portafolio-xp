@@ -211,6 +211,36 @@ describe('windowReducer: move', () => {
   })
 })
 
+describe('windowReducer: navigate', () => {
+  it('shows another item without changing the stacking or the focus', () => {
+    const before = run(open('projects', { target: 'uno' }), open('about'))
+    const state = windowReducer(before, {
+      type: 'navigate',
+      id: 'projects',
+      target: 'dos',
+    })
+    expect(windowOf(state, 'projects').target).toBe('dos')
+    expect(state.zOrder).toEqual(before.zOrder)
+    expect(state.activeId).toBe('about')
+    expect(state.focusRequest).toBe(before.focusRequest)
+  })
+
+  it('drops the target to show the first item', () => {
+    const state = run(open('skills', { target: 'uno' }), {
+      type: 'navigate',
+      id: 'skills',
+    })
+    expect(windowOf(state, 'skills')).not.toHaveProperty('target')
+  })
+
+  it('returns the same state when the item does not change', () => {
+    const state = run(open('projects', { target: 'uno' }))
+    expect(
+      windowReducer(state, { type: 'navigate', id: 'projects', target: 'uno' }),
+    ).toBe(state)
+  })
+})
+
 describe('windowReducer: unknown windows', () => {
   it.each<WindowAction>([
     { type: 'close', id: 'about' },
@@ -219,6 +249,7 @@ describe('windowReducer: unknown windows', () => {
     { type: 'restore', id: 'about' },
     { type: 'focus', id: 'about' },
     { type: 'move', id: 'about', position: { x: 1, y: 1 } },
+    { type: 'navigate', id: 'about', target: 'x' },
   ])('ignores $type on a window that is not open', (action) => {
     const state = run(open('projects'))
     expect(windowReducer(state, action)).toBe(state)

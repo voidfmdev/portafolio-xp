@@ -7,33 +7,16 @@ import {
   type ReactNode,
 } from 'react'
 import { useI18n } from '../../i18n/useI18n'
-import type { MessageKey } from '../../i18n/messages'
 import { keepTabInside } from '../../lib/a11y'
+import {
+  CONTROL_LABEL,
+  XP_CONTROL_STYLE,
+  type TitleBarControl,
+} from './titleBarControls'
 import { isOnTitleBarControls, useWindowDrag } from './useWindowDrag'
 import { useWindowManager } from './useWindowManager'
 import type { WindowState } from './windowReducer'
 import styles from './Window.module.css'
-
-type Control = 'minimize' | 'maximize' | 'restore' | 'close'
-
-/**
- * XP.css draws each title bar button from its English aria-label (D28). These
- * values are style hooks, never shown or read: the accessible name comes from
- * aria-labelledby, which points at the translated label and takes precedence.
- */
-const XP_CONTROL_STYLE: Record<Control, string> = {
-  minimize: 'Minimize',
-  maximize: 'Maximize',
-  restore: 'Restore',
-  close: 'Close',
-}
-
-const CONTROL_LABEL: Record<Control, MessageKey> = {
-  minimize: 'window.minimize',
-  maximize: 'window.maximize',
-  restore: 'window.restore',
-  close: 'window.close',
-}
 
 interface WindowProps {
   window: WindowState
@@ -63,7 +46,11 @@ export function Window({ window, title, icon, children }: WindowProps) {
   const toggleMaximize = () =>
     window.maximized ? restoreApp(window.id) : maximizeApp(window.id)
 
-  const controls: { key: string; control: Control; onClick: () => void }[] = [
+  const controls: {
+    key: string
+    control: TitleBarControl
+    onClick: () => void
+  }[] = [
     {
       key: 'minimize',
       control: 'minimize',

@@ -34,6 +34,8 @@ export type WindowAction =
   | { type: 'restore'; id: AppId }
   | { type: 'focus'; id: AppId }
   | { type: 'move'; id: AppId; position: Point }
+  /** The window shows another item (or its first one, without target); the hash follows (D29). */
+  | { type: 'navigate'; id: AppId; target?: string }
 
 export const initialWindowState: WindowManagerState = {
   windows: [],
@@ -55,6 +57,13 @@ function patch(
   return state.windows.map((window) =>
     window.id === id ? { ...window, ...changes } : window,
   )
+}
+
+/** The window showing `target`, or without the field when there is none, as `open` leaves it. */
+function withTarget(window: WindowState, target?: string): WindowState {
+  const next = { ...window }
+  delete next.target
+  return target === undefined ? next : { ...next, target }
 }
 
 function raise(zOrder: AppId[], id: AppId): AppId[] {
@@ -158,6 +167,16 @@ export function windowReducer(
       return {
         ...state,
         windows: patch(state, action.id, { position: { x, y } }),
+      }
+    }
+
+    case 'navigate': {
+      if (window.target === action.target) return state
+      return {
+        ...state,
+        windows: state.windows.map((other) =>
+          other.id === action.id ? withTarget(other, action.target) : other,
+        ),
       }
     }
   }
