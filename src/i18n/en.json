@@ -90,7 +90,7 @@
   "contact.required": "Fill in this field.",
   "contact.invalidEmail": "Enter a valid email address.",
   "contact.readyTitle": "Message ready",
-  "contact.readyBody": "Your email app opened with the message ready to send.",
+  "contact.readyBody": "We tried to open your email app. If it didn't open, write to {email}.",
   "contact.heading": "New Message",
   "contact.defaultSubject": "Message from the portfolio",
   "contact.mailBody": "{message}\n\n{name}\n{email}",

@@ -36,8 +36,9 @@ const HEADER_FIELDS: readonly {
 const FIELD_ORDER: readonly Field[] = ['name', 'email', 'subject', 'message']
 
 /**
- * "New message" form (spec §5.5): validates in the browser, then opens the
- * visitor's mail app through `mailto:` and confirms in an XP message box.
+ * "New message" form (spec §5.5): validates in the browser, then tries to open
+ * the visitor's mail app through `mailto:`. The browser cannot tell whether it
+ * opened, so the XP message box gives the address to write to instead.
  */
 export function ContactWindow() {
   const { t, localize } = useI18n()
@@ -197,7 +198,7 @@ export function ContactWindow() {
           buttons={[{ label: t('dialog.ok'), onClick: closeDialog }]}
           onCancel={closeDialog}
         >
-          {t('contact.readyBody')}
+          {t('contact.readyBody', { email: content.contact.email })}
         </MessageDialog>
       )}
     </div>

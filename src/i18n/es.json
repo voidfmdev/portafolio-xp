@@ -90,7 +90,7 @@
   "contact.required": "Completa este campo.",
   "contact.invalidEmail": "Escribe un correo electrónico válido.",
   "contact.readyTitle": "Mensaje listo",
-  "contact.readyBody": "Tu programa de correo se abrió con el mensaje listo para enviar.",
+  "contact.readyBody": "Intentamos abrir tu programa de correo. Si no se abrió, escribe a {email}.",
   "contact.heading": "Mensaje nuevo",
   "contact.defaultSubject": "Mensaje desde el portafolio",
   "contact.mailBody": "{message}\n\n{name}\n{email}",

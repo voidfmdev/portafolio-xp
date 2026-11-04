@@ -86,7 +86,7 @@ describe('ContactWindow', () => {
     expect(email).not.toHaveAttribute('aria-invalid')
   })
 
-  it('opens the mail app with the message and confirms in a message box', () => {
+  it('tries to open the mail app and gives the address in a message box', () => {
     const open = vi.spyOn(window, 'open').mockReturnValue(null)
     const dialog = contactWindow()
     fillValid(dialog)
@@ -105,7 +105,7 @@ describe('ContactWindow', () => {
       name: 'Mensaje listo',
     })
     expect(message).toHaveAccessibleDescription(
-      'Tu programa de correo se abrió con el mensaje listo para enviar.',
+      'Intentamos abrir tu programa de correo. Si no se abrió, escribe a <correo>.',
     )
     expect(
       within(message).getByRole('button', { name: 'Aceptar' }),
@@ -116,6 +116,22 @@ describe('ContactWindow', () => {
     fireEvent.click(within(message).getByRole('button', { name: 'Aceptar' }))
     expect(within(dialog).queryByRole('alertdialog')).toBeNull()
     expect(send).toHaveFocus()
+  })
+
+  it('gives the address in English too', () => {
+    vi.spyOn(window, 'open').mockReturnValue(null)
+    renderSession({ lang: 'en', initialApps: [{ id: 'contact' }] })
+    const dialog = screen.getByRole('dialog', { name: 'Contact' })
+    fill(dialog, 'Name', 'Ana')
+    fill(dialog, 'Email', 'ana@example.com')
+    fill(dialog, 'Message', 'Hello')
+    fireEvent.click(within(dialog).getByRole('button', { name: 'Send' }))
+
+    expect(
+      within(dialog).getByRole('alertdialog', { name: 'Message ready' }),
+    ).toHaveAccessibleDescription(
+      "We tried to open your email app. If it didn't open, write to <correo>.",
+    )
   })
 
   it('uses the subject when there is one', () => {
