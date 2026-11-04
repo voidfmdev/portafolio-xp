@@ -1,22 +1,22 @@
-/* Portafolio XP — tokens Luna aprobados en Fase 1 (D13).
-   Única fuente de colores, tipografías y medidas. Ningún componente usa valores sueltos. */
+/* Portafolio XP — Luna tokens approved in Phase 1 (D13).
+   Single source of colors, fonts and sizes. No component uses loose values. */
 
 :root {
-  /* Tipografía */
+  /* Typography */
   --font-ui: Tahoma, Verdana, "Segoe UI", sans-serif;
   --font-title: "Trebuchet MS", Tahoma, Verdana, sans-serif;
   --font-size-base: 12px;
   --font-size-title: 13px;
   --font-size-heading: 20px;
 
-  /* Texto */
+  /* Text */
   --color-text: #000000;
   --color-text-muted: #5A5A5A;
   --color-text-on-dark: #FFFFFF;
   --color-link: #215DC6;
   --color-link-hover: #0A4ED6;
 
-  /* Ventana (barra de título Luna) */
+  /* Window (Luna title bar) */
   --color-title-start: #3D8BF5;
   --color-title-mid: #0A4ED6;
   --color-title-end: #0640B0;
@@ -27,14 +27,14 @@
   --color-dialog-border: #D4D0C8;
   --color-field-border: #7F9DB9;
 
-  /* Botones de título */
+  /* Title bar buttons */
   --color-btn-title-start: #5A9DF5;
   --color-btn-title-end: #2561D9;
   --color-close-start: #E8744F;
   --color-close-mid: #D9442E;
   --color-close-end: #B83221;
 
-  /* Barra de tareas y bandeja */
+  /* Taskbar and tray */
   --color-taskbar-start: #3168D5;
   --color-taskbar-mid: #245EDC;
   --color-taskbar-end: #1C45A8;
@@ -44,12 +44,12 @@
   --color-tray-start: #1A9BE8;
   --color-tray-end: #0F7BD0;
 
-  /* Botón Inicio */
+  /* Start button */
   --color-start-top: #4FB04E;
   --color-start-mid: #3F9B41;
   --color-start-end: #2E7A30;
 
-  /* Panel de tareas del Explorador */
+  /* Explorer task pane */
   --color-taskpane-start: #7BA3E8;
   --color-taskpane-end: #5E79D9;
   --color-taskpane-section: #D6DFF7;
@@ -57,15 +57,15 @@
   --color-taskpane-header-end: #C6D3F7;
   --color-taskpane-title: #215DC6;
 
-  /* Selección y foco */
+  /* Selection and focus */
   --color-selection: #316AC5;
   --color-focus-ring: #FFBF47;
 
-  /* Globo del asistente */
+  /* Assistant balloon */
   --color-balloon: #FFFFE1;
   --color-balloon-border: #000000;
 
-  /* Medidas */
+  /* Sizes */
   --taskbar-height: 30px;
   --titlebar-height: 30px;
   --toolbar-height: 36px;
@@ -84,14 +84,14 @@
   --motion-duration: 160ms;
 }
 
-/* Debe ir después del valor por defecto: misma especificidad, gana la última. */
+/* Must come after the default value: same specificity, the last one wins. */
 @media (prefers-reduced-motion: reduce) {
   :root {
     --motion-duration: 0ms;
   }
 }
 
-/* Espaciado (D27): márgenes, rellenos y separaciones de los componentes */
+/* Spacing (D27): margins, paddings and gaps of every component */
 :root {
   --space-1: 2px;
   --space-2: 4px;
@@ -102,7 +102,7 @@
   --space-7: 32px;
 }
 
-/* Medidas del escritorio y alias de la paleta (D30) */
+/* Desktop sizes and palette aliases (D30) */
 :root {
   --border-width: 1px;
   --focus-ring-width: 2px;
@@ -116,11 +116,31 @@
   --welcome-band-height: 80px;
   --shadow-text-on-desktop: 1px 1px 2px rgba(0, 0, 0, 0.8);
 
-  /* Alias sobre colores de D13: superficies nuevas, sin colores nuevos */
+  /* Aliases of D13 colors for new surfaces; no new colors */
   --color-title-inactive-start: var(--color-taskpane-start);
   --color-title-inactive-end: var(--color-taskpane-end);
   --color-welcome-band: var(--color-taskbar-end);
   --color-welcome-start: var(--color-taskpane-start);
   --color-welcome-end: var(--color-taskpane-end);
   --color-welcome-divider: var(--color-taskpane-section);
+}
+
+/* Content windows (D32): text, dialogs and galleries; aliases of D13 colors, no new colors */
+:root {
+  --line-height-text: 1.5;
+  --profile-photo-size: 96px;
+  --icon-view-cell: var(--desktop-icon-cell);
+  --gallery-aspect-ratio: 16 / 9;
+  --gallery-max-height: 280px;
+  --gallery-thumbnail-height: 48px;
+  --dialog-width: 360px;
+
+  --color-heading: var(--color-taskpane-title);
+  --color-button-border: var(--color-title-shadow);
+  --color-error: var(--color-close-end);
+}
+
+/* Control Panel › Reduce animations (D33): same effect as prefers-reduced-motion. */
+:root[data-reduce-motion] {
+  --motion-duration: 0ms;
 }
