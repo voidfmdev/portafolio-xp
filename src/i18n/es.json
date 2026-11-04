@@ -52,10 +52,15 @@
   "explorer.projectCount.other": "{count} proyectos",
   "explorer.categoryCount.one": "{count} categoría",
   "explorer.categoryCount.other": "{count} categorías",
+  "explorer.objectCount.one": "{count} objeto",
+  "explorer.objectCount.other": "{count} objetos",
+  "explorer.empty": "Esta carpeta está vacía",
 
   "about.online": "En línea",
 
   "projects.technologies": "Tecnologías",
+  "projects.meta": "{year} · {role}",
+  "projects.gallery": "Capturas",
   "projects.github": "GitHub",
   "projects.demo": "Demo",
   "projects.caseStudy": "Caso de estudio",
@@ -73,7 +78,6 @@
   "experience.institution": "Institución",
   "experience.period": "Período",
   "experience.location": "Ubicación",
-  "experience.periodWithDuration": "{range} ({duration})",
 
   "dates.present": "Presente",
 
@@ -87,12 +91,17 @@
   "contact.invalidEmail": "Escribe un correo electrónico válido.",
   "contact.readyTitle": "Mensaje listo",
   "contact.readyBody": "Tu programa de correo se abrió con el mensaje listo para enviar.",
+  "contact.heading": "Mensaje nuevo",
+  "contact.defaultSubject": "Mensaje desde el portafolio",
+  "contact.mailBody": "{message}\n\n{name}\n{email}",
+  "contact.otherLinks": "Otras formas de contacto",
 
   "messenger.available": "Disponible",
   "messenger.you": "Tú",
   "messenger.typing": "{name} está escribiendo…",
   "messenger.history": "Conversación",
   "messenger.questions": "Preguntas sugeridas",
+  "messenger.sender": "{name} ({time}):",
 
   "assistant.label": "Asistente",
   "assistant.close": "Cerrar mensaje",
@@ -103,6 +112,7 @@
   "controlPanel.language": "Idioma",
   "controlPanel.assistant": "Asistente activado",
   "controlPanel.reduceMotion": "Reducir animaciones",
+  "controlPanel.preferences": "Preferencias",
   "controlPanel.reset": "Restablecer escritorio",
   "controlPanel.resetConfirm": "Se borrarán las preferencias guardadas en este navegador. ¿Continuar?",
 

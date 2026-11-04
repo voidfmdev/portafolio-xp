@@ -52,10 +52,15 @@
   "explorer.projectCount.other": "{count} projects",
   "explorer.categoryCount.one": "{count} category",
   "explorer.categoryCount.other": "{count} categories",
+  "explorer.objectCount.one": "{count} object",
+  "explorer.objectCount.other": "{count} objects",
+  "explorer.empty": "This folder is empty",
 
   "about.online": "Online",
 
   "projects.technologies": "Technologies",
+  "projects.meta": "{year} · {role}",
+  "projects.gallery": "Screenshots",
   "projects.github": "GitHub",
   "projects.demo": "Demo",
   "projects.caseStudy": "Case study",
@@ -73,7 +78,6 @@
   "experience.institution": "Institution",
   "experience.period": "Period",
   "experience.location": "Location",
-  "experience.periodWithDuration": "{range} ({duration})",
 
   "dates.present": "Present",
 
@@ -87,12 +91,17 @@
   "contact.invalidEmail": "Enter a valid email address.",
   "contact.readyTitle": "Message ready",
   "contact.readyBody": "Your email app opened with the message ready to send.",
+  "contact.heading": "New Message",
+  "contact.defaultSubject": "Message from the portfolio",
+  "contact.mailBody": "{message}\n\n{name}\n{email}",
+  "contact.otherLinks": "Other ways to reach me",
 
   "messenger.available": "Available",
   "messenger.you": "You",
   "messenger.typing": "{name} is typing…",
   "messenger.history": "Conversation",
   "messenger.questions": "Suggested questions",
+  "messenger.sender": "{name} ({time}):",
 
   "assistant.label": "Assistant",
   "assistant.close": "Close message",
@@ -103,6 +112,7 @@
   "controlPanel.language": "Language",
   "controlPanel.assistant": "Assistant enabled",
   "controlPanel.reduceMotion": "Reduce animations",
+  "controlPanel.preferences": "Preferences",
   "controlPanel.reset": "Reset desktop",
   "controlPanel.resetConfirm": "This clears the preferences saved in this browser. Continue?",
 
