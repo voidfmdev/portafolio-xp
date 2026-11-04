@@ -1,4 +1,6 @@
 import { useCallback, useId, useRef, useState } from 'react'
+import { Assistant } from '../assistant/Assistant'
+import { useAssistant } from '../assistant/useAssistant'
 import { Desktop } from './desktop/Desktop'
 import { StartMenu, type CloseOptions } from './start-menu/StartMenu'
 import { Taskbar } from './taskbar/Taskbar'
@@ -9,12 +11,14 @@ interface DesktopSessionProps {
   onLogOff: () => void
 }
 
-/** Desktop, taskbar and Start menu of a signed-in guest. Needs a WindowManagerProvider. */
+/**
+ * Desktop, assistant, taskbar and Start menu of a signed-in guest. Needs a
+ * WindowManagerProvider and an AssistantProvider.
+ */
 export function DesktopSession({ onLogOff }: DesktopSessionProps) {
   useHashRoute()
+  const { help } = useAssistant()
   const [startMenuOpen, setStartMenuOpen] = useState(false)
-  // Placeholder until the assistant is implemented: the tray button and Help only toggle this.
-  const [assistantVisible, setAssistantVisible] = useState(true)
   const startButtonRef = useRef<HTMLButtonElement>(null)
   const startMenuId = useId()
 
@@ -26,20 +30,19 @@ export function DesktopSession({ onLogOff }: DesktopSessionProps) {
   return (
     <div className={styles.session}>
       <Desktop />
+      <Assistant />
       <Taskbar
         startButtonRef={startButtonRef}
         startMenuId={startMenuId}
         startMenuOpen={startMenuOpen}
         onToggleStartMenu={() => setStartMenuOpen((open) => !open)}
-        assistantVisible={assistantVisible}
-        onToggleAssistant={() => setAssistantVisible((visible) => !visible)}
       />
       {startMenuOpen && (
         <StartMenu
           id={startMenuId}
           startButtonRef={startButtonRef}
           onClose={closeStartMenu}
-          onHelp={() => setAssistantVisible(true)}
+          onHelp={help}
           onLogOff={onLogOff}
         />
       )}

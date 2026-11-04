@@ -5,6 +5,7 @@ import about from './about.svg'
 import assistant from './assistant.svg'
 import avatar from './avatar.svg'
 import back from './back.svg'
+import close from './close.svg'
 import contact from './contact.svg'
 import controlPanel from './control-panel.svg'
 import cv from './cv.svg'
@@ -40,6 +41,8 @@ export const icons = {
   assistant,
   avatar,
   back,
+  /** Small close button of the assistant's balloon. */
+  close,
   cv,
   document,
   education,

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { AssistantProvider } from '../assistant/AssistantProvider'
 import { I18nProvider } from '../i18n/I18nProvider'
 import { LANG_STORAGE_KEY } from '../i18n/initialLang'
 import { isLang } from '../i18n/locales'
@@ -40,7 +41,9 @@ export function App() {
           <Welcome onEnter={() => setScreen(desktopFromHash())} />
         ) : (
           <WindowManagerProvider initialApps={screen.initialApps}>
-            <DesktopSession onLogOff={logOff} />
+            <AssistantProvider>
+              <DesktopSession onLogOff={logOff} />
+            </AssistantProvider>
           </WindowManagerProvider>
         )}
       </PreferencesProvider>

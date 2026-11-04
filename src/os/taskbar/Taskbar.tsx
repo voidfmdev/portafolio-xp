@@ -1,4 +1,5 @@
 import type { RefObject } from 'react'
+import { useAssistant } from '../../assistant/useAssistant'
 import { appIcons, icons } from '../../icons'
 import { LANGS } from '../../i18n/locales'
 import { translate } from '../../i18n/messages'
@@ -14,8 +15,6 @@ interface TaskbarProps {
   startMenuId: string
   startMenuOpen: boolean
   onToggleStartMenu: () => void
-  assistantVisible: boolean
-  onToggleAssistant: () => void
 }
 
 /** Start button, one button per open window, and the tray (spec §4.3). */
@@ -24,11 +23,14 @@ export function Taskbar({
   startMenuId,
   startMenuOpen,
   onToggleStartMenu,
-  assistantVisible,
-  onToggleAssistant,
 }: TaskbarProps) {
   const { t, lang, setLang } = useI18n()
   const { state, focusApp, minimizeApp } = useWindowManager()
+  const {
+    visible: assistantVisible,
+    toggle: toggleAssistant,
+    trayButtonRef,
+  } = useAssistant()
   const nextLang = LANGS.find((other) => other !== lang) ?? lang
 
   // Clicking the active window minimizes it; any other is restored and brought forward.
@@ -88,14 +90,14 @@ export function Taskbar({
         >
           {t('language.code')}
         </button>
-        {/* Placeholder until the assistant is implemented: only its visibility changes. */}
         <button
+          ref={trayButtonRef}
           type="button"
           className={styles.trayButton}
           aria-label={
             assistantVisible ? t('tray.assistantHide') : t('tray.assistantShow')
           }
-          onClick={onToggleAssistant}
+          onClick={toggleAssistant}
         >
           <img className={styles.trayIcon} src={icons.assistant} alt="" />
         </button>

@@ -104,6 +104,8 @@
   "messenger.sender": "{name} ({time}):",
 
   "assistant.label": "Assistant",
+  "assistant.name": "Floppy",
+  "assistant.said": "{name} says: {message}",
   "assistant.close": "Close message",
   "assistant.dontShowAgain": "Don't show again",
 

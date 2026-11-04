@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react'
 import { PreferencesProvider } from '../app/PreferencesProvider'
+import { AssistantProvider } from '../assistant/AssistantProvider'
 import { I18nProvider } from '../i18n/I18nProvider'
 import { LANG_STORAGE_KEY } from '../i18n/initialLang'
 import type { Lang } from '../i18n/locales'
@@ -25,7 +26,9 @@ export function renderSession({
     <I18nProvider>
       <PreferencesProvider>
         <WindowManagerProvider initialApps={initialApps}>
-          <DesktopSession onLogOff={onLogOff} />
+          <AssistantProvider>
+            <DesktopSession onLogOff={onLogOff} />
+          </AssistantProvider>
         </WindowManagerProvider>
       </PreferencesProvider>
     </I18nProvider>,

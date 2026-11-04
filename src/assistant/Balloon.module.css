@@ -1,0 +1,114 @@
+/* Balloon tip of the XP notification area: cream paper, black outline, bold
+   title and a tail pointing at the character below it. Its buttons reset
+   XP.css's `button` rules; hover and pressed states need the longer selectors. */
+
+.balloon {
+  position: relative;
+  width: var(--balloon-width);
+  max-width: 100%;
+  padding: var(--space-3) var(--space-3) var(--space-4) var(--space-4);
+  border: var(--border-width) solid var(--color-balloon-border);
+  border-radius: var(--radius-window);
+  background: var(--color-balloon);
+  box-shadow: var(--shadow-window);
+  color: var(--color-text);
+}
+
+/* Tail: a square turned 45°, centered on the bottom border and on the character. */
+.balloon::after {
+  content: '';
+  position: absolute;
+  right: calc((var(--assistant-size) - var(--balloon-tail-size)) / 2);
+  bottom: calc(var(--balloon-tail-size) / -2 - var(--border-width));
+  width: var(--balloon-tail-size);
+  height: var(--balloon-tail-size);
+  border-right: var(--border-width) solid var(--color-balloon-border);
+  border-bottom: var(--border-width) solid var(--color-balloon-border);
+  background: var(--color-balloon);
+  transform: rotate(45deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .balloon {
+    animation: appear var(--motion-duration) ease-out;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.icon {
+  flex: none;
+  display: block;
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+}
+
+.title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+.close,
+.link {
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font: inherit;
+}
+
+.close {
+  flex: none;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-control);
+}
+
+.close:not(:disabled):hover {
+  box-shadow: none;
+  border-color: var(--color-field-border);
+  background: var(--color-window-body);
+}
+
+.close:not(:disabled):active {
+  box-shadow: none;
+  background: var(--color-dialog);
+}
+
+.text {
+  margin: 0;
+  line-height: var(--line-height-text);
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+/* "Don't show again" looks like a link, as in the balloons of the time. */
+.link {
+  margin-top: var(--space-3);
+  color: var(--color-link);
+  text-align: left;
+  text-decoration: underline;
+}
+
+.link:not(:disabled):hover,
+.link:not(:disabled):active {
+  box-shadow: none;
+  color: var(--color-link-hover);
+}

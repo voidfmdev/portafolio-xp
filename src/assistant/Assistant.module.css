@@ -1,0 +1,37 @@
+/* Bottom-right corner of the desktop, over the windows and under the Start menu:
+   the session draws it after the desktop and before the menu. */
+
+.assistant {
+  position: absolute;
+  right: var(--space-5);
+  bottom: calc(var(--taskbar-height) + var(--space-3));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-4);
+  max-width: calc(100% - 2 * var(--space-5));
+  /* Only the balloon takes clicks; the rest of the corner belongs to the windows below. */
+  pointer-events: none;
+}
+
+.balloon {
+  max-width: 100%;
+  pointer-events: auto;
+}
+
+.character {
+  flex: none;
+  width: var(--assistant-size);
+  height: var(--assistant-size);
+}
+
+/* Out of sight, still read by screen readers. */
+.announcer {
+  position: absolute;
+  width: var(--border-width);
+  height: var(--border-width);
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
