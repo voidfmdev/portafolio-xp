@@ -136,10 +136,10 @@ Fuera de alcance de la v1: IA en vivo, backend propio, CMS, sonidos, redimension
 - Mismo personaje que en Messenger. Vive en una esquina del escritorio y comenta mediante un globo estilo aviso de bandeja de XP.
 - Eventos que disparan comentarios (desde `assistant.json`): primera visita, abrir cada ventana (una vez por sesión), inactividad de 60 s, cerrar todas las ventanas, cambiar idioma, intentar arrastrar en móvil, y `help`: "Ayuda" del menú Inicio muestra al asistente con instrucciones de uso del escritorio [DE D23].
 - Reglas: cola de mensajes, un globo a la vez, botón cerrar, opción "No mostrar más" (persistente), apagado también desde Panel de control. En móvil: botón flotante.
-- Animaciones propias en SVG/CSS: reposo (parpadeo), saludo, hablar, pensar. El personaje se implementa como componente `Character` con un contrato fijo de animaciones, para que sea intercambiable sin tocar el motor [D5 pendiente].
+- Animaciones propias en SVG/CSS: reposo (parpadeo), saludo, hablar, pensar. El personaje se implementa como componente `Character` con un contrato fijo de animaciones, para que sea intercambiable sin tocar el motor (D5: Floppy).
 
 ### 5.8 Descargar CV
-- Abre `public/cv/<alias>-cv-es.pdf` o `-en.pdf` según idioma. En Fase 2 se usa un PDF de relleno.
+- Abre `cv/cv-es.pdf` o `cv/cv-en.pdf` según idioma (D31). En Fase 2 se usa un PDF de relleno.
 
 ### 5.9 Papelera de reciclaje
 - v1: ventana "La papelera está vacía". [PE Fase 3] easter egg (p. ej., "ideas descartadas").
@@ -196,13 +196,13 @@ Logo y bandera de Windows, fondo Bliss, íconos y sonidos de Windows XP y cualqu
 |------|---------|------------------------------|
 | 0 Definición | Esta spec y `decisiones.md` | Spec aprobada; D5 y D6 decididas |
 | 1 Diseño | Tokens XP y artboards (escritorio, ventana tipo, menú Inicio, móvil) en una herramienta de diseño | Look aprobado (según D6) |
-| 2 Esqueleto | Repo, Vite+React+TS, XP.css, gestor de ventanas, barra de tareas, menú Inicio, bienvenida, i18n, modo móvil, 6 ventanas con contenido de relleno, motor del asistente con personaje de prueba, deploy en GitHub Pages | Demo navegable publicada; checklist de cierre de la fase cumplido |
+| 2 Esqueleto | Repo, Vite+React+TS, XP.css, gestor de ventanas, barra de tareas, menú Inicio, bienvenida, i18n, modo móvil, 6 ventanas con contenido de relleno, motor del asistente con el personaje Floppy (D5), deploy en GitHub Pages | Demo navegable publicada; checklist de cierre de la fase cumplido |
 | 3 Contenido | JSON reales (ES/EN), CV, formulario, Papelera, Buscar, easter eggs | Cada ventana revisada por ti |
 | 4 Pulido | Accesibilidad, rendimiento, SEO/OG, dominio, pruebas en dispositivos | Lighthouse en verde; prueba en celular real |
 
 ## 11. Pendientes y riesgos abiertos
 
-- [PE] D5 personaje · [PE] D6 mockups · [PE] alias, usuario de GitHub, correo y redes · [PE] lista de proyectos y qué se puede mostrar de cada uno · [PE] CV en PDF (ES/EN) · [PE] servicio de formulario · [PE] fondo e íconos definitivos.
+- [PE] D6 mockups · [PE] alias, usuario de GitHub, correo y redes · [PE] lista de proyectos y qué se puede mostrar de cada uno · [PE] CV en PDF (ES/EN) · [PE] servicio de formulario · [PE] fondo e íconos definitivos.
 - [RS] Marcas y derechos de terceros (§8.5). [RS] Confidencialidad de proyectos de empleador/cliente (§5.2). [RS] Accesibilidad de la metáfora de escritorio (§9). [RS] Peso de las capturas de proyectos (optimizar antes de subir).
 
 ## 12. Convenciones del repositorio
