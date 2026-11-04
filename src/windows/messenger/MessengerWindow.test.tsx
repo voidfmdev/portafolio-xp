@@ -187,4 +187,23 @@ describe('MessengerWindow', () => {
     )
     expect(history(dialog)).toHaveTextContent('Answer A')
   })
+
+  it('shows the assistant character as its avatar, talking while it types', () => {
+    renderSession({ initialApps: [{ id: 'messenger' }] })
+    const dialog = messengerWindow()
+    const avatar = within(dialog)
+      .getByRole('heading', { name: 'Asistente de prueba' })
+      .closest('header')!
+      .querySelector('svg[data-animation]')!
+    expect(avatar).toHaveAttribute('aria-hidden', 'true')
+    expect(avatar).toHaveAttribute('data-animation', 'idle')
+
+    fireEvent.click(within(dialog).getByRole('button', { name: 'Pregunta A' }))
+    expect(avatar).toHaveAttribute('data-animation', 'talk')
+
+    act(() => {
+      vi.advanceTimersByTime(TYPING_DELAY_MS)
+    })
+    expect(avatar).toHaveAttribute('data-animation', 'idle')
+  })
 })

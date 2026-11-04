@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { useReducedMotion } from '../../app/useReducedMotion'
+import { AssistantCharacter } from '../../assistant/assistantCharacter'
 import { content } from '../../content'
 import type { MessengerAction } from '../../content/schema'
 import { appIcons, icons } from '../../icons'
@@ -113,8 +114,12 @@ export function MessengerWindow() {
   return (
     <div className={styles.messenger}>
       <header className={styles.header}>
-        {/* Placeholder until the assistant character is implemented: its own icon. */}
-        <img className={styles.avatar} src={icons.assistant} alt="" />
+        {/* The desktop assistant's character (D5): it talks while it types. */}
+        <span className={`${styles.avatar} ${styles.character}`}>
+          <AssistantCharacter
+            animation={conversation.pending === null ? 'idle' : 'talk'}
+          />
+        </span>
         <div className={styles.identity}>
           <h3 className={styles.name}>{assistantName}</h3>
           <p className={styles.status}>

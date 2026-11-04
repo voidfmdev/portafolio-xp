@@ -29,6 +29,13 @@
   outline: var(--border-width) solid var(--color-field-border);
 }
 
+/* The assistant's character drawn inside the same picture frame. */
+.character {
+  display: block;
+  padding: var(--space-1);
+  background: var(--color-window-body);
+}
+
 .identity {
   min-width: 0;
 }
