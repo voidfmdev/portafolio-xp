@@ -30,7 +30,8 @@ export function MessengerWindow() {
   )
   const historyRef = useRef<HTMLDivElement>(null)
   const optionsRef = useRef<HTMLDivElement>(null)
-  const assistantName = localize(messenger.header.name)
+  // Same name as the desktop balloon: one interface string for both.
+  const assistantName = t('assistant.name')
   const questions = new Map(messenger.questions.map((item) => [item.id, item]))
 
   useEffect(() => {

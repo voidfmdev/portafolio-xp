@@ -232,7 +232,8 @@ const questionSchema = z.strictObject({
 
 export const messengerSchema = z
   .strictObject({
-    header: z.strictObject({ name: nameSchema, personalMessage: textSchema }),
+    // The assistant's name is an interface string (`assistant.name`), shared with the desktop balloon.
+    header: z.strictObject({ personalMessage: textSchema }),
     greeting: textSchema,
     start: z.array(slug).min(1),
     questions: uniqueList(questionSchema, 'id'),

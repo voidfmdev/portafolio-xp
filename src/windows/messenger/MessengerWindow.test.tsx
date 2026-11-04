@@ -11,7 +11,6 @@ const { messenger } = vi.hoisted(() => {
   const both = (es: string, en: string) => ({ es, en })
   const messenger: Messenger = {
     header: {
-      name: 'Asistente de prueba',
       personalMessage: both('Mensaje personal', 'Personal message'),
     },
     greeting: both('Hola', 'Hi'),
@@ -99,13 +98,11 @@ describe('MessengerWindow', () => {
     renderSession({ initialApps: [{ id: 'messenger' }] })
     const dialog = messengerWindow()
     expect(
-      within(dialog).getByRole('heading', { name: 'Asistente de prueba' }),
+      within(dialog).getByRole('heading', { name: 'Floppy' }),
     ).toBeVisible()
     expect(within(dialog).getByText('Disponible')).toBeVisible()
     expect(within(dialog).getByText('Mensaje personal')).toBeVisible()
-    expect(history(dialog)).toHaveTextContent(
-      /Asistente de prueba \(\d{2}:\d{2}\):\s*Hola/,
-    )
+    expect(history(dialog)).toHaveTextContent(/Floppy \(\d{2}:\d{2}\):\s*Hola/)
     expect(questions(dialog)).toEqual(['Pregunta A', 'Pregunta B'])
   })
 
@@ -117,9 +114,7 @@ describe('MessengerWindow', () => {
     expect(history(dialog)).toHaveTextContent(
       /Tú \(\d{2}:\d{2}\):\s*Pregunta A/,
     )
-    expect(
-      within(dialog).getByText('Asistente de prueba está escribiendo…'),
-    ).toBeVisible()
+    expect(within(dialog).getByText('Floppy está escribiendo…')).toBeVisible()
     expect(questions(dialog)).toEqual([])
     // The buttons went away; the focus waits on their group.
     expect(within(dialog).getByRole('group')).toHaveFocus()
@@ -192,7 +187,7 @@ describe('MessengerWindow', () => {
     renderSession({ initialApps: [{ id: 'messenger' }] })
     const dialog = messengerWindow()
     const avatar = within(dialog)
-      .getByRole('heading', { name: 'Asistente de prueba' })
+      .getByRole('heading', { name: 'Floppy' })
       .closest('header')!
       .querySelector('svg[data-animation]')!
     expect(avatar).toHaveAttribute('aria-hidden', 'true')

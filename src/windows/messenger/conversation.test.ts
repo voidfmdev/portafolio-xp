@@ -5,7 +5,7 @@ import { answer, ask, startConversation } from './conversation'
 const text = (value: string) => ({ es: value, en: value })
 
 const messenger: Messenger = {
-  header: { name: 'Asistente', personalMessage: text('Hola') },
+  header: { personalMessage: text('Hola') },
   greeting: text('Saludo'),
   start: ['a', 'b'],
   questions: [

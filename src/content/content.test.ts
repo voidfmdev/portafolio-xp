@@ -134,6 +134,12 @@ describe('validateContent', () => {
       'messenger.json: questions.0.actions.0.type',
     ],
     [
+      'the assistant name in Messenger, which lives in the interface strings (D38)',
+      ['messenger', 'header', 'name'],
+      'Floppy',
+      'messenger.json: header',
+    ],
+    [
       'a missing window comment',
       ['assistant', 'windowOpened', 'recycle-bin'],
       undefined,
