@@ -1,0 +1,66 @@
+/* Profile card (photo or avatar, name, role, location, status) and free sections. */
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding-bottom: var(--space-5);
+  border-bottom: var(--border-width) solid var(--color-dialog-border);
+}
+
+.photo {
+  flex: none;
+  width: var(--profile-photo-size);
+  height: var(--profile-photo-size);
+  object-fit: cover;
+  border: var(--focus-ring-width) solid var(--color-window-body);
+  border-radius: var(--radius-control);
+  outline: var(--border-width) solid var(--color-field-border);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.details p {
+  margin: 0;
+}
+
+.name {
+  color: var(--color-heading);
+  font-family: var(--font-title);
+  font-size: var(--font-size-heading);
+  overflow-wrap: anywhere;
+}
+
+.line {
+  color: var(--color-text-muted);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.statusIcon {
+  flex: none;
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+}
+
+.section {
+  padding-top: var(--space-5);
+}
+
+.section + .section {
+  margin-top: var(--space-5);
+  border-top: var(--border-width) solid var(--color-dialog-border);
+}
+
+.section > :last-child {
+  margin-bottom: 0;
+}

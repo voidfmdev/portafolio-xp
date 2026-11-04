@@ -1,5 +1,6 @@
 import { fireEvent, screen, within } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { tabbableElements } from '../../lib/a11y'
 import { renderSession } from '../test-utils'
 
 beforeEach(() => {
@@ -22,7 +23,7 @@ describe('Window', () => {
     renderSession({ initialApps: [{ id: 'about' }] })
     const dialog = screen.getByRole('dialog', { name: 'Sobre mí' })
     expect(
-      within(dialog).getByRole('heading', { name: 'Sobre mí' }),
+      within(dialog).getByRole('heading', { level: 2, name: 'Sobre mí' }),
     ).toBeVisible()
   })
 
@@ -75,7 +76,7 @@ describe('Window', () => {
     const restore = within(dialog).getByRole('button', { name: 'Restaurar' })
     expect(restore).toHaveAttribute('aria-label', 'Restore')
 
-    fireEvent.doubleClick(within(dialog).getByRole('heading'))
+    fireEvent.doubleClick(within(dialog).getByRole('heading', { level: 2 }))
     expect(
       within(dialog).getByRole('button', { name: 'Maximizar' }),
     ).toBeVisible()
@@ -100,14 +101,18 @@ describe('Window', () => {
   it('keeps Tab cycling inside the window', () => {
     renderSession({ initialApps: [{ id: 'about' }] })
     const dialog = screen.getByRole('dialog', { name: 'Sobre mí' })
-    const buttons = within(dialog).getAllByRole('button')
-    const last = buttons[buttons.length - 1]
+    const elements = tabbableElements(dialog)
+    const first = elements[0]
+    const last = elements[elements.length - 1]
+    expect(first).toBe(
+      within(dialog).getByRole('button', { name: 'Minimizar' }),
+    )
 
     last.focus()
     fireEvent.keyDown(last, { key: 'Tab' })
-    expect(buttons[0]).toHaveFocus()
+    expect(first).toHaveFocus()
 
-    fireEvent.keyDown(buttons[0], { key: 'Tab', shiftKey: true })
+    fireEvent.keyDown(first, { key: 'Tab', shiftKey: true })
     expect(last).toHaveFocus()
   })
 
@@ -140,7 +145,9 @@ describe('Window', () => {
       offsetWidth: { value: 400 },
       offsetHeight: { value: 300 },
     })
-    const titleBar = within(dialog).getByRole('heading').parentElement!
+    const titleBar = within(dialog).getByRole('heading', {
+      level: 2,
+    }).parentElement!
     const left = Number.parseInt(dialog.style.left)
     const top = Number.parseInt(dialog.style.top)
 

@@ -1,0 +1,63 @@
+/* Project detail: year and role, summary, technology chips and link buttons. */
+
+.meta {
+  margin: calc(-1 * var(--space-3)) 0 var(--space-5);
+}
+
+.summary {
+  font-weight: bold;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  padding: var(--space-1) var(--space-3);
+  border: var(--border-width) solid var(--color-field-border);
+  border-radius: var(--radius-control);
+  background: var(--color-taskpane-section);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.links:empty {
+  display: none;
+}
+
+/* Links drawn as Luna push buttons: they open another site, so they stay links. */
+.linkButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border: var(--border-width) solid var(--color-button-border);
+  border-radius: var(--radius-control);
+  background: linear-gradient(var(--color-window-body), var(--color-dialog));
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.linkButton:hover {
+  color: var(--color-text);
+  box-shadow: inset 0 0 0 var(--focus-ring-width) var(--color-focus-ring);
+}
+
+.linkButton:active {
+  background: var(--color-dialog);
+}
+
+.linkIcon {
+  flex: none;
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+}

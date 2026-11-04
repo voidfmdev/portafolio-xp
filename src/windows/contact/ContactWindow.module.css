@@ -1,0 +1,131 @@
+/* "New message" window: beige header with the address fields, white message
+   area, footer with the other contact links and Send. */
+
+/* Positioned so the message box covers only this content. */
+.contact {
+  position: relative;
+  height: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-dialog);
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: var(--border-width) solid var(--color-dialog-border);
+  font-size: inherit;
+  font-weight: bold;
+}
+
+.headingIcon {
+  flex: none;
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-3);
+}
+
+/* Each field row joins the two columns of the grid. */
+.row {
+  display: contents;
+}
+
+.fields input {
+  width: 100%;
+}
+
+.to {
+  color: var(--color-text-muted);
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.message {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-height: 0;
+  padding: 0 var(--space-3);
+}
+
+.textarea {
+  flex: 1;
+  min-height: 0;
+  border: var(--border-width) solid var(--color-field-border);
+  resize: none;
+}
+
+.error {
+  margin: 0;
+  color: var(--color-error);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.linksLabel {
+  color: var(--color-text-muted);
+}
+
+.linkList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.linkIcon,
+.sendIcon {
+  flex: none;
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+}
+
+.send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}

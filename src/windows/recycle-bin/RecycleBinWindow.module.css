@@ -1,0 +1,36 @@
+/* Empty Recycle Bin: centered message over white, object count in the status bar. */
+
+.recycleBin {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--color-window-body);
+}
+
+.icon {
+  width: var(--desktop-icon-size);
+  height: var(--desktop-icon-size);
+}
+
+.message {
+  margin: 0;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.statusBar {
+  flex: none;
+  min-height: var(--statusbar-height);
+  margin: 0;
+  background: var(--color-dialog);
+}

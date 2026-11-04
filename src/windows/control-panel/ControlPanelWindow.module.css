@@ -1,0 +1,32 @@
+/* Settings on the warm grey of XP dialogs, grouped in XP.css fieldsets. */
+
+/* Positioned so the message box covers only this content. */
+.controlPanel {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+  background: var(--color-dialog);
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.group legend {
+  padding: 0 var(--space-1);
+  color: var(--color-heading);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}

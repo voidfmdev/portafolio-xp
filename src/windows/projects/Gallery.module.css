@@ -1,0 +1,104 @@
+/* Screenshot gallery: large image between two arrows, position, thumbnails.
+   Arrow and thumbnail buttons reset XP.css's `button` rules. */
+
+.gallery,
+.placeholder {
+  margin-bottom: var(--space-5);
+}
+
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  aspect-ratio: var(--gallery-aspect-ratio);
+  max-height: var(--gallery-max-height);
+  padding: var(--space-5);
+  border: var(--border-width) dashed var(--color-field-border);
+  background: var(--color-taskpane-section);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.placeholderIcon {
+  width: var(--icon-size-medium);
+  height: var(--icon-size-medium);
+  filter: grayscale(1);
+}
+
+.placeholderText {
+  margin: 0;
+}
+
+.stage {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.image {
+  flex: 1;
+  min-width: 0;
+  aspect-ratio: var(--gallery-aspect-ratio);
+  max-height: var(--gallery-max-height);
+  object-fit: contain;
+  border: var(--border-width) solid var(--color-field-border);
+  background: var(--color-taskpane-section);
+}
+
+.arrow,
+.thumbnail {
+  flex: none;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-control);
+  background: none;
+  box-shadow: none;
+}
+
+.arrow:not(:disabled):hover,
+.arrow:not(:disabled):active,
+.thumbnail:not(:disabled):hover,
+.thumbnail:not(:disabled):active {
+  box-shadow: none;
+}
+
+.arrowIcon {
+  display: block;
+  width: var(--icon-size-medium);
+  height: var(--icon-size-medium);
+}
+
+.position {
+  margin: var(--space-2) 0;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.thumbnail {
+  border: var(--focus-ring-width) solid transparent;
+}
+
+.thumbnail[aria-current='true'] {
+  border-color: var(--color-selection);
+}
+
+.thumbnailImage {
+  display: block;
+  height: var(--gallery-thumbnail-height);
+  aspect-ratio: var(--gallery-aspect-ratio);
+  object-fit: cover;
+}

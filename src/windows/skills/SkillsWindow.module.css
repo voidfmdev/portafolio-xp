@@ -1,0 +1,31 @@
+/* Icon view of a category: one cell per skill, with its level as text (no bars). */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--icon-view-cell), 1fr));
+  gap: var(--space-5) var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+.icon {
+  width: var(--desktop-icon-size);
+  height: var(--desktop-icon-size);
+}
+
+.name {
+  overflow-wrap: anywhere;
+}
+
+.level {
+  color: var(--color-text-muted);
+}

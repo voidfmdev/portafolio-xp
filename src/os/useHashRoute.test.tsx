@@ -20,9 +20,9 @@ function goTo(hash: string) {
 
 describe('useHashRoute', () => {
   it('names the topmost window in the hash, with its item', () => {
-    window.history.replaceState(null, '', '/#/proyectos/mi-proyecto')
-    renderSession({ initialApps: [{ id: 'projects', target: 'mi-proyecto' }] })
-    expect(window.location.hash).toBe('#/proyectos/mi-proyecto')
+    window.history.replaceState(null, '', '/#/proyectos/proyecto-2')
+    renderSession({ initialApps: [{ id: 'projects', target: 'proyecto-2' }] })
+    expect(window.location.hash).toBe('#/proyectos/proyecto-2')
 
     fireEvent.doubleClick(screen.getByRole('button', { name: 'Sobre mí' }))
     expect(window.location.hash).toBe('#/sobre-mi')
@@ -38,9 +38,9 @@ describe('useHashRoute', () => {
 
   it('opens the window a new hash names', () => {
     renderSession()
-    goTo('#/habilidades/certificaciones')
+    goTo('#/habilidades/habilidades-blandas')
     expect(screen.getByRole('dialog', { name: 'Habilidades' })).toHaveFocus()
-    expect(window.location.hash).toBe('#/habilidades/certificaciones')
+    expect(window.location.hash).toBe('#/habilidades/habilidades-blandas')
   })
 
   it('ignores a hash it does not know', () => {

@@ -1,0 +1,61 @@
+/* Details view of the Explorer: beige column headers, white rows, thin separators. */
+
+.section + .section {
+  margin-top: var(--space-6);
+}
+
+/* Scrolls sideways on its own when the window is narrower than the table. */
+.frame {
+  overflow-x: auto;
+  border: var(--border-width) solid var(--color-field-border);
+}
+
+.details {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.details th,
+.details td {
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  vertical-align: top;
+}
+
+.details th {
+  border-right: var(--border-width) solid var(--color-dialog-border);
+  border-bottom: var(--border-width) solid var(--color-dialog-border);
+  background: linear-gradient(var(--color-window-body), var(--color-dialog));
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+.details th:last-child {
+  border-right: none;
+}
+
+.details tbody tr + tr td {
+  border-top: var(--border-width) solid var(--color-dialog);
+}
+
+.titleCell {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.rowIcon {
+  flex: none;
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+}
+
+.range {
+  display: block;
+  white-space: nowrap;
+}
+
+.duration {
+  display: block;
+  color: var(--color-text-muted);
+}

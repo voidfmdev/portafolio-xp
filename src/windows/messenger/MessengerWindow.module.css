@@ -1,0 +1,183 @@
+/* Conversation window: contact header, white history, question buttons below.
+   Action links reset XP.css's `button` rules; their states need the longer selectors. */
+
+.messenger {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  height: 100%;
+  padding: var(--space-3);
+  background: linear-gradient(
+    var(--color-taskpane-section),
+    var(--color-window-body)
+  );
+}
+
+.header {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.avatar {
+  flex: none;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border: var(--focus-ring-width) solid var(--color-window-body);
+  border-radius: var(--radius-control);
+  outline: var(--border-width) solid var(--color-field-border);
+}
+
+.identity {
+  min-width: 0;
+}
+
+.identity p {
+  margin: 0;
+}
+
+.name {
+  margin: 0;
+  color: var(--color-heading);
+  font-family: var(--font-title);
+  font-size: var(--font-size-title);
+  overflow-wrap: anywhere;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+}
+
+.statusIcon {
+  flex: none;
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+}
+
+.personal {
+  font-style: italic;
+}
+
+.history {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--space-3);
+  border: var(--border-width) solid var(--color-field-border);
+  background: var(--color-window-body);
+}
+
+.entries {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.entry + .entry {
+  margin-top: var(--space-4);
+}
+
+.meta {
+  margin: 0 0 var(--space-1);
+  color: var(--color-text-muted);
+}
+
+.text {
+  margin: 0;
+  line-height: var(--line-height-text);
+  white-space: pre-line;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Answer actions look like links, as in the chat apps of the time. */
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--color-link);
+  font: inherit;
+  text-align: left;
+  text-decoration: underline;
+}
+
+.action:not(:disabled):hover,
+.action:not(:disabled):active {
+  box-shadow: none;
+  color: var(--color-link-hover);
+}
+
+.actionIcon {
+  flex: none;
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+}
+
+.typing {
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.composer {
+  flex: none;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.visitor {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.options {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-3);
+  border: var(--border-width) solid var(--color-field-border);
+  background: var(--color-window-body);
+}
+
+.options:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.prompt {
+  margin: 0 0 var(--space-3);
+  color: var(--color-text-muted);
+}
+
+.optionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.option {
+  min-width: 0;
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+}
