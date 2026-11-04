@@ -7,6 +7,7 @@ import { DesktopSession } from '../os/DesktopSession'
 import { parseHash, replaceHash, type Route } from '../os/routes'
 import { Welcome } from '../os/welcome/Welcome'
 import { WindowManagerProvider } from '../os/window-manager/WindowManagerProvider'
+import { PreferencesProvider } from './PreferencesProvider'
 
 type Screen =
   { name: 'welcome' } | { name: 'desktop'; initialApps: readonly Route[] }
@@ -34,13 +35,15 @@ export function App() {
 
   return (
     <I18nProvider>
-      {screen.name === 'welcome' ? (
-        <Welcome onEnter={() => setScreen(desktopFromHash())} />
-      ) : (
-        <WindowManagerProvider initialApps={screen.initialApps}>
-          <DesktopSession onLogOff={logOff} />
-        </WindowManagerProvider>
-      )}
+      <PreferencesProvider>
+        {screen.name === 'welcome' ? (
+          <Welcome onEnter={() => setScreen(desktopFromHash())} />
+        ) : (
+          <WindowManagerProvider initialApps={screen.initialApps}>
+            <DesktopSession onLogOff={logOff} />
+          </WindowManagerProvider>
+        )}
+      </PreferencesProvider>
     </I18nProvider>
   )
 }
