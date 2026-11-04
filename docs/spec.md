@@ -1,6 +1,6 @@
 # Portafolio XP — Especificación funcional v0.1
 
-Estado: **borrador para validación (Fase 0)** · Fecha: 2026-11-02 · Ubicación sugerida en el repo: `docs/spec.md`
+Estado: **vigente**, aprobada al cerrar la Fase 0 · Fecha: 2026-11-02 · Actualizada: 2026-11-04, al cerrar la Fase 2 (estado de las fases en §10)
 Fuentes de verdad del proyecto: este archivo + `docs/decisiones.md`. Si algo no está aquí, no se implementa sin decisión registrada.
 
 Etiquetas: [HC] hecho confirmado · [DE] decisión tomada · [SU] supuesto · [PE] pendiente · [RS] riesgo
@@ -170,7 +170,7 @@ Esquemas con validación en build (p. ej. Zod) para detectar textos faltantes en
 - Base técnica: XP.css (MIT) + ajustes propios en `src/styles/xp-overrides.css`. Tokens en `src/styles/tokens.css`.
 
 ### 8.2 Fondo de escritorio
-- Imagen propia. Propuestas: paisaje del sur de Chile ilustrado (lago, volcán, colinas) o degradado azul estilo Luna. [DE pendiente, se decide viendo opciones]. No se usa el fondo "Bliss" ni ninguna foto de Microsoft.
+- Imagen propia: paisaje del sur de Chile ilustrado (lago, volcán, colinas) en SVG, en `public/wallpaper/lake-volcano.svg` [DE D11]; se descartó el degradado azul estilo Luna. No se usa el fondo "Bliss" ni ninguna foto de Microsoft.
 
 ### 8.3 Íconos
 - Set propio de íconos de escritorio en SVG (32 y 48 px) con estilo coherente, o librería con licencia libre verificada. No se usan íconos de Windows.
@@ -195,15 +195,17 @@ Logo y bandera de Windows, fondo Bliss, íconos y sonidos de Windows XP y cualqu
 | Fase | Alcance | Cierre (lo valida la dueña del proyecto) |
 |------|---------|------------------------------|
 | 0 Definición | Esta spec y `decisiones.md` | Spec aprobada; D5 y D6 decididas |
-| 1 Diseño | Tokens XP y artboards (escritorio, ventana tipo, menú Inicio, móvil) en una herramienta de diseño | Look aprobado (según D6) |
+| 1 Diseño | Tokens XP y artboards en una herramienta de diseño; reducida por D6 a escritorio y ventana tipo | Look aprobado (según D6) |
 | 2 Esqueleto | Repo, Vite+React+TS, XP.css, gestor de ventanas, barra de tareas, menú Inicio, bienvenida, i18n, modo móvil, 6 ventanas con contenido de relleno, motor del asistente con el personaje Floppy (D5), deploy en GitHub Pages | Demo navegable publicada; checklist de cierre de la fase cumplido |
 | 3 Contenido | JSON reales (ES/EN), CV, formulario, Papelera, Buscar, easter eggs | Cada ventana revisada por ti |
 | 4 Pulido | Accesibilidad, rendimiento, SEO/OG, dominio, pruebas en dispositivos | Lighthouse en verde; prueba en celular real |
 
+Estado al 2026-11-04: Fases 0, 1 y 2 cerradas (F1 y F2 en `docs/decisiones.md`); el proyecto está en pausa hasta que lleguen los datos de la Fase 3. Detalle en `docs/estado-del-proyecto.md`.
+
 ## 11. Pendientes y riesgos abiertos
 
-- [PE] D6 mockups · [PE] alias, usuario de GitHub, correo y redes · [PE] lista de proyectos y qué se puede mostrar de cada uno · [PE] CV en PDF (ES/EN) · [PE] servicio de formulario · [PE] fondo e íconos definitivos.
-- [RS] Marcas y derechos de terceros (§8.5). [RS] Confidencialidad de proyectos de empleador/cliente (§5.2). [RS] Accesibilidad de la metáfora de escritorio (§9). [RS] Peso de las capturas de proyectos (optimizar antes de subir).
+- [PE] alias, usuario de GitHub, correo y redes · [PE] lista de proyectos y qué se puede mostrar de cada uno · [PE] CV en PDF (ES/EN) · [PE] servicio de formulario (D10, Fase 3) · [PE] librería de íconos de marca y su licencia (§5.3) · [PE] imagen Open Graph propia y dominio (§9) · [PE] D41 a D46 en `docs/decisiones.md`.
+- [RS] Marcas y derechos de terceros (§8.5). [RS] Confidencialidad de proyectos de empleador/cliente (§5.2). [RS] Accesibilidad de la metáfora de escritorio (§9). [RS] Contraste de algunos pares de tokens Luna (D46). [RS] Alto de pantalla en celulares reales, sin probar en un dispositivo (Fase 4). [RS] Peso de las capturas de proyectos (optimizar antes de subir).
 
 ## 12. Convenciones del repositorio
 
