@@ -1,0 +1,45 @@
+/* Typography of the white content area, shared by the Explorer windows.
+   XP.css gives headings huge sizes; these set them from the tokens. */
+
+.pageTitle {
+  margin: 0 0 var(--space-4);
+  color: var(--color-heading);
+  font-family: var(--font-title);
+  font-size: var(--font-size-heading);
+  font-weight: normal;
+}
+
+.sectionTitle {
+  margin: 0 0 var(--space-3);
+  color: var(--color-heading);
+  font-family: var(--font-title);
+  font-size: var(--font-size-title);
+  font-weight: bold;
+}
+
+/* Section headings take the focus when the task pane jumps to them. */
+.sectionTitle:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.text {
+  margin: 0 0 var(--space-4);
+  line-height: var(--line-height-text);
+  /* Line breaks written in the content files show as such. */
+  white-space: pre-line;
+}
+
+.muted {
+  color: var(--color-text-muted);
+}
+
+.empty {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.divider {
+  margin: var(--space-5) 0;
+  border: none;
+  border-top: var(--border-width) solid var(--color-dialog-border);
+}

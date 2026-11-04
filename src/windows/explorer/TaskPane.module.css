@@ -1,0 +1,84 @@
+/* Boxes of the Luna task pane: white-to-blue header, light blue body. Items reset
+   XP.css's `button` rules; hover, pressed and focus states need the longer selectors. */
+
+.section + .section {
+  margin-top: var(--space-4);
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-control) var(--radius-control) 0 0;
+  background: linear-gradient(
+    to right,
+    var(--color-taskpane-header-start),
+    var(--color-taskpane-header-end)
+  );
+  color: var(--color-taskpane-title);
+}
+
+.title {
+  margin: 0;
+  font-size: inherit;
+  font-weight: bold;
+}
+
+/* Sits on the blue end of the header, where the title blue lacks contrast. */
+.aside {
+  flex: none;
+  color: var(--color-text);
+}
+
+.list {
+  margin: 0;
+  padding: var(--space-2);
+  list-style: none;
+  border: var(--border-width) solid var(--color-window-body);
+  border-top: none;
+  background: var(--color-taskpane-section);
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: var(--space-1) var(--space-2);
+  border: none;
+  border-radius: var(--radius-control);
+  background: none;
+  box-shadow: none;
+  color: var(--color-taskpane-title);
+  font: inherit;
+  text-align: left;
+}
+
+.item:not(:disabled):hover {
+  box-shadow: none;
+  text-decoration: underline;
+}
+
+.item:not(:disabled):active {
+  box-shadow: none;
+}
+
+.item[aria-current='page'] {
+  background: var(--color-selection);
+  color: var(--color-text-on-dark);
+}
+
+.icon {
+  flex: none;
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+}
+
+.label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
