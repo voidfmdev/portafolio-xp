@@ -41,9 +41,12 @@
   height: var(--icon-size-medium);
 }
 
+/* A long word, such as an email address, wraps instead of leaving a narrow dialog. */
 .text {
+  min-width: 0;
   margin: 0;
   align-self: center;
+  overflow-wrap: anywhere;
 }
 
 .buttons {
