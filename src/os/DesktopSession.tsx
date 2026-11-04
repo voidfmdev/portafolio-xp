@@ -5,6 +5,7 @@ import { Desktop } from './desktop/Desktop'
 import { StartMenu, type CloseOptions } from './start-menu/StartMenu'
 import { Taskbar } from './taskbar/Taskbar'
 import { useHashRoute } from './useHashRoute'
+import { useIsMobile } from './useIsMobile'
 import styles from './DesktopSession.module.css'
 
 interface DesktopSessionProps {
@@ -17,7 +18,8 @@ interface DesktopSessionProps {
  */
 export function DesktopSession({ onLogOff }: DesktopSessionProps) {
   useHashRoute()
-  const { help } = useAssistant()
+  const { help, visible: assistantVisible } = useAssistant()
+  const mobile = useIsMobile()
   const [startMenuOpen, setStartMenuOpen] = useState(false)
   const startButtonRef = useRef<HTMLButtonElement>(null)
   const startMenuId = useId()
@@ -28,7 +30,10 @@ export function DesktopSession({ onLogOff }: DesktopSessionProps) {
   }, [])
 
   return (
-    <div className={styles.session}>
+    <div
+      className={styles.session}
+      data-assistant-dock={mobile && assistantVisible ? '' : undefined}
+    >
       <Desktop />
       <Assistant />
       <Taskbar

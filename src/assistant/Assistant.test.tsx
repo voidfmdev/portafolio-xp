@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { PREFERENCE_KEYS } from '../app/preferences'
 import type { Assistant } from '../content/schema'
 import { storage } from '../lib/storage'
-import { renderSession } from '../os/test-utils'
+import { renderSession, stubMobile } from '../os/test-utils'
 import { balloonDuration, FIRST_VISIT_KEY, IDLE_TIMEOUT_MS } from './engine'
 
 // Comments of their own, so these tests do not depend on the filler content.
@@ -43,6 +43,7 @@ beforeEach(() => {
 
 afterEach(() => {
   vi.useRealTimers()
+  vi.unstubAllGlobals()
   window.history.replaceState(null, '', '/')
 })
 
@@ -324,5 +325,57 @@ describe('Assistant', () => {
 
     closeBalloon()
     expect(character).toHaveAttribute('data-animation', 'idle')
+  })
+})
+
+describe('Assistant in mobile mode (spec §4.7)', () => {
+  function floatingButton() {
+    return screen.queryByRole('button', { name: 'Pedir ayuda a Floppy' })
+  }
+
+  it('is a floating button that shows Help and closes it again', () => {
+    stubMobile()
+    returningVisitor()
+    renderSession()
+    const button = floatingButton()!
+    expect(button).toHaveAttribute('aria-expanded', 'false')
+
+    fireEvent.click(button)
+    expect(balloon()).toHaveTextContent('Así se usa')
+    expect(button).toHaveAttribute('aria-expanded', 'true')
+
+    fireEvent.click(button)
+    expect(balloon()).toBeNull()
+    expect(button).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('keeps showing its comments in balloons', () => {
+    stubMobile()
+    renderSession()
+    expect(balloon()).toHaveTextContent('Bienvenida')
+    expect(floatingButton()).toBeVisible()
+  })
+
+  it('keeps a strip above the taskbar while it is on, so it covers no window', () => {
+    stubMobile()
+    reduceMotion()
+    returningVisitor()
+    const { container } = renderSession()
+    const session = container.firstElementChild!
+    expect(session).toHaveAttribute('data-assistant-dock')
+
+    fireEvent.click(trayButton('Ocultar asistente'))
+    expect(floatingButton()).toBeNull()
+    expect(session).not.toHaveAttribute('data-assistant-dock')
+  })
+
+  it('is no button on wide screens', () => {
+    returningVisitor()
+    const { container } = renderSession()
+    expect(corner()).toBeInTheDocument()
+    expect(floatingButton()).toBeNull()
+    expect(container.firstElementChild).not.toHaveAttribute(
+      'data-assistant-dock',
+    )
   })
 })

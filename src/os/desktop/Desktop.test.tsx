@@ -23,16 +23,15 @@ const ICONS = [
 ]
 
 describe('Desktop', () => {
-  it('shows the eight icons as buttons, CV first and the Recycle Bin apart', () => {
+  it('shows the eight icons as buttons in one list, CV first and the Recycle Bin last', () => {
     renderSession()
     const desktop = screen.getByRole('main', { name: 'Escritorio' })
-    const lists = within(desktop).getAllByRole('list')
-    const names = lists.map((list) =>
+    const list = within(desktop).getByRole('list')
+    expect(
       within(list)
         .getAllByRole('button')
         .map((button) => button.textContent),
-    )
-    expect(names).toEqual([ICONS.slice(0, 7), ICONS.slice(7)])
+    ).toEqual(ICONS)
   })
 
   it('selects with one click and opens with a double click', () => {
@@ -44,6 +43,22 @@ describe('Desktop', () => {
 
     fireEvent.doubleClick(icon)
     expect(screen.getByRole('dialog', { name: 'Habilidades' })).toBeVisible()
+  })
+
+  it('opens with a tap, whatever the screen width', () => {
+    renderSession()
+    const icon = screen.getByRole('button', { name: 'Proyectos' })
+    fireEvent.pointerDown(icon, { pointerType: 'touch' })
+    fireEvent.click(icon)
+    expect(screen.getByRole('dialog', { name: 'Proyectos' })).toBeVisible()
+  })
+
+  it('does not open with a single mouse click', () => {
+    renderSession()
+    const icon = screen.getByRole('button', { name: 'Proyectos' })
+    fireEvent.pointerDown(icon, { pointerType: 'mouse' })
+    fireEvent.click(icon)
+    expect(screen.queryByRole('dialog')).toBeNull()
   })
 
   it('opens with Enter', () => {

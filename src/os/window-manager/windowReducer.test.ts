@@ -256,6 +256,52 @@ describe('windowReducer: unknown windows', () => {
   })
 })
 
+describe('windowReducer: fit', () => {
+  it('shrinks and moves every window into a smaller desktop', () => {
+    const bounds = { width: 360, height: 600 }
+    const state = windowReducer(run(open('about'), open('projects')), {
+      type: 'fit',
+      bounds,
+    })
+    for (const window of state.windows) {
+      expect(window.size.width).toBeLessThanOrEqual(bounds.width)
+      expect(window.size.height).toBeLessThanOrEqual(bounds.height)
+      expect(window.position.x + window.size.width).toBeLessThanOrEqual(
+        bounds.width,
+      )
+      expect(window.position.y + window.size.height).toBeLessThanOrEqual(
+        bounds.height,
+      )
+    }
+    expect(windowOf(state, 'projects')).toMatchObject({
+      size: { width: 360, height: DEFAULT_SIZES.projects.height },
+      position: { x: 0 },
+    })
+  })
+
+  it('leaves the stacking, the focus and the other fields alone', () => {
+    const before = run(open('about'), open('projects', { target: 'uno' }))
+    const after = windowReducer(before, {
+      type: 'fit',
+      bounds: { width: 400, height: 300 },
+    })
+    expect(after.zOrder).toEqual(before.zOrder)
+    expect(after.activeId).toBe(before.activeId)
+    expect(after.focusRequest).toBe(before.focusRequest)
+    expect(windowOf(after, 'projects').target).toBe('uno')
+  })
+
+  it('returns the same state when every window already fits', () => {
+    const state = run(open('about'))
+    expect(
+      windowReducer(state, {
+        type: 'fit',
+        bounds: { width: 2000, height: 2000 },
+      }),
+    ).toBe(state)
+  })
+})
+
 describe('visibleWindows', () => {
   it('lists the windows that are not minimized, topmost first', () => {
     const state = run(open('about'), open('projects'), open('skills'), {

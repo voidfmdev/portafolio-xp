@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { content } from '../content'
 import { useI18n } from '../i18n/useI18n'
+import { useIsMobile } from '../os/useIsMobile'
 import { AssistantCharacter } from './assistantCharacter'
 import { Balloon } from './Balloon'
 import { ONE_SHOT_ANIMATIONS, type CharacterAnimation } from './Character'
@@ -32,11 +33,14 @@ interface Reaction {
 
 /**
  * The assistant in the bottom-right corner of the desktop: its character and,
- * above it, the balloon of the current message (spec §5.7).
+ * above it, the balloon of the current message (spec §5.7). In mobile mode the
+ * character is a floating button that asks for Help (spec §4.7).
  */
 export function Assistant() {
   const { t, localize } = useI18n()
-  const { visible, message, dismiss, turnOff, trayButtonRef } = useAssistant()
+  const { visible, message, help, dismiss, turnOff, trayButtonRef } =
+    useAssistant()
+  const mobile = useIsMobile()
   const balloonRef = useRef<HTMLDivElement>(null)
 
   // The character stays mounted while it plays `hide`, after `visible` turned false.
@@ -113,6 +117,20 @@ export function Assistant() {
     : ''
   const isHelp = balloon?.event.type === 'help'
 
+  // The floating button shows the Help balloon, or closes it when it is open.
+  function onButton() {
+    if (balloon && isHelp) dismiss(balloon.id)
+    else help()
+  }
+
+  const character = (
+    <AssistantCharacter
+      className={styles.character}
+      animation={animation}
+      onDone={onCharacterDone}
+    />
+  )
+
   return (
     <>
       {/* Always in the page, so screen readers announce every new message. */}
@@ -136,11 +154,19 @@ export function Assistant() {
               </Balloon>
             </div>
           )}
-          <AssistantCharacter
-            className={styles.character}
-            animation={animation}
-            onDone={onCharacterDone}
-          />
+          {mobile ? (
+            <button
+              type="button"
+              className={styles.button}
+              aria-label={t('assistant.button', { name })}
+              aria-expanded={isHelp}
+              onClick={onButton}
+            >
+              {character}
+            </button>
+          ) : (
+            character
+          )}
         </aside>
       )}
     </>

@@ -104,3 +104,29 @@
 .selected .avatar {
   border-color: var(--color-focus-ring);
 }
+
+/* Mobile mode (spec §4.7): logo and instruction above the accounts, centered,
+   with the divider across. */
+@media (width < 768px) {
+  .middle {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: var(--space-6);
+  }
+
+  .brand {
+    flex: none;
+    align-items: center;
+    text-align: center;
+  }
+
+  .divider {
+    flex: none;
+    width: 100%;
+    height: var(--border-width);
+  }
+
+  .accounts {
+    flex: none;
+  }
+}

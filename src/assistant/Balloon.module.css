@@ -14,11 +14,18 @@
   color: var(--color-text);
 }
 
-/* Tail: a square turned 45°, centered on the bottom border and on the character. */
+/* Tail: a square turned 45°, centered on the bottom border and on what the
+   assistant sets as its anchor (the character, or its button in mobile mode). */
 .balloon::after {
   content: '';
   position: absolute;
-  right: calc((var(--assistant-size) - var(--balloon-tail-size)) / 2);
+  right: calc(
+    (
+        var(--assistant-anchor, var(--assistant-size)) -
+          var(--balloon-tail-size)
+      ) /
+      2
+  );
   bottom: calc(var(--balloon-tail-size) / -2 - var(--border-width));
   width: var(--balloon-tail-size);
   height: var(--balloon-tail-size);

@@ -1,6 +1,7 @@
-import { useId, type ReactNode } from 'react'
+import { useId, useRef, useState, type MouseEvent, type ReactNode } from 'react'
 import { icons } from '../../icons'
 import { useI18n } from '../../i18n/useI18n'
+import { useIsMobile } from '../../os/useIsMobile'
 import type { ExplorerNavigation } from './useExplorerHistory'
 import styles from './Explorer.module.css'
 
@@ -21,7 +22,8 @@ interface ExplorerProps {
 /**
  * Explorer chrome shared by About, Projects, Skills and Experience (spec §4.5):
  * Back/Forward toolbar, address bar with crumbs, blue task pane, white content
- * area and status bar.
+ * area and status bar. In mobile mode (spec §4.7) the task pane folds into a
+ * drop-down above the content, named after what is on screen.
  */
 export function Explorer({
   icon,
@@ -33,6 +35,20 @@ export function Explorer({
 }: ExplorerProps) {
   const { t } = useI18n()
   const id = useId()
+  const mobile = useIsMobile()
+  const [paneOpen, setPaneOpen] = useState(false)
+  const toggleRef = useRef<HTMLButtonElement>(null)
+  const current = path[path.length - 1]
+
+  // Choosing an item folds the drop-down. The focus waits on its toggle, unless
+  // the item already sent it elsewhere (a section heading).
+  function onPaneClick(event: MouseEvent<HTMLElement>) {
+    if (!mobile || !(event.target as Element).closest('button')) return
+    setPaneOpen(false)
+    if (event.currentTarget.contains(document.activeElement)) {
+      toggleRef.current?.focus()
+    }
+  }
 
   return (
     <div className={styles.explorer}>
@@ -79,7 +95,27 @@ export function Explorer({
       </div>
 
       <div className={styles.main}>
-        <nav className={styles.taskPane} aria-label={t('explorer.taskPane')}>
+        {mobile && (
+          <button
+            ref={toggleRef}
+            type="button"
+            className={styles.paneToggle}
+            aria-label={t('explorer.taskPaneToggle', { current })}
+            aria-expanded={paneOpen}
+            aria-controls={`${id}-pane`}
+            onClick={() => setPaneOpen((open) => !open)}
+          >
+            <img className={styles.paneToggleIcon} src={icon} alt="" />
+            <span className={styles.paneToggleText}>{current}</span>
+          </button>
+        )}
+        <nav
+          id={`${id}-pane`}
+          className={styles.taskPane}
+          aria-label={t('explorer.taskPane')}
+          hidden={mobile && !paneOpen}
+          onClick={onPaneClick}
+        >
           {taskPane}
         </nav>
         {/* Focusable so the keyboard can scroll it, named after what it shows. */}

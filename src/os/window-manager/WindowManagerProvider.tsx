@@ -1,5 +1,13 @@
-import { useCallback, useMemo, useReducer, useRef, type ReactNode } from 'react'
+import {
+  useCallback,
+  useLayoutEffect,
+  useMemo,
+  useReducer,
+  useRef,
+  type ReactNode,
+} from 'react'
 import type { AppId } from '../appIds'
+import { useIsMobile } from '../useIsMobile'
 import type { Point, Size } from './geometry'
 import {
   TASKBAR_BUTTON_ATTRIBUTE,
@@ -7,7 +15,11 @@ import {
   type OpenOptions,
   type OpenRequest,
 } from './WindowManagerContext'
-import { initialWindowState, windowReducer } from './windowReducer'
+import {
+  initialWindowState,
+  visibleWindows,
+  windowReducer,
+} from './windowReducer'
 
 function canTakeFocus(element: HTMLElement | null | undefined) {
   return !!element && element.isConnected && !element.closest('[hidden]')
@@ -40,6 +52,12 @@ export function WindowManagerProvider({
   )
   const desktopRef = useRef<HTMLElement>(null)
   const openers = useRef(new Map<AppId, HTMLElement>())
+  const mobile = useIsMobile()
+  // Read by the actions, which must not change on every window update.
+  const stateRef = useRef(state)
+  useLayoutEffect(() => {
+    stateRef.current = state
+  })
 
   const desktopBounds = useCallback((): Size | undefined => {
     const desktop = desktopRef.current
@@ -48,6 +66,18 @@ export function WindowManagerProvider({
     }
     return { width: desktop.clientWidth, height: desktop.clientHeight }
   }, [])
+
+  // The windows of the initial state opened before the desktop had a size; fit
+  // them before the first paint, and again whenever the viewport shrinks.
+  useLayoutEffect(() => {
+    function fit() {
+      const bounds = desktopBounds()
+      if (bounds) dispatch({ type: 'fit', bounds })
+    }
+    fit()
+    window.addEventListener('resize', fit)
+    return () => window.removeEventListener('resize', fit)
+  }, [desktopBounds])
 
   const openApp = useCallback(
     (id: AppId, { target, opener }: OpenOptions = {}) => {
@@ -58,14 +88,27 @@ export function WindowManagerProvider({
     [desktopBounds],
   )
 
-  const closeApp = useCallback((id: AppId) => {
-    const opener = openers.current.get(id)
-    openers.current.delete(id)
-    // Moved before the window unmounts, so the focus is never lost to <body>.
-    const returnTo = canTakeFocus(opener) ? opener : desktopRef.current
-    returnTo?.focus()
-    dispatch({ type: 'close', id })
-  }, [])
+  const closeApp = useCallback(
+    (id: AppId) => {
+      const opener = openers.current.get(id)
+      openers.current.delete(id)
+      // Mobile shows one window at a time: the next one comes up with the focus,
+      // since the icon or button the closed one came from now lies under it.
+      const next = mobile
+        ? visibleWindows(stateRef.current).find((window) => window.id !== id)
+        : undefined
+      if (next) {
+        dispatch({ type: 'close', id })
+        dispatch({ type: 'focus', id: next.id })
+        return
+      }
+      // Moved before the window unmounts, so the focus is never lost to <body>.
+      const returnTo = canTakeFocus(opener) ? opener : desktopRef.current
+      returnTo?.focus()
+      dispatch({ type: 'close', id })
+    },
+    [mobile],
+  )
 
   const minimizeApp = useCallback((id: AppId) => {
     document

@@ -140,3 +140,34 @@
   width: var(--icon-size-medium);
   height: var(--icon-size-medium);
 }
+
+/* Mobile mode (spec §4.7): the menu fills the screen above the taskbar, with
+   its two columns stacked and Log off at the bottom. */
+@media (width < 768px) {
+  .startMenu {
+    top: 0;
+    right: 0;
+    width: auto;
+    border-radius: 0;
+  }
+
+  .menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .columns {
+    flex: 1;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .places {
+    border-top: var(--border-width) solid var(--color-taskpane-header-end);
+    border-left: none;
+  }
+}

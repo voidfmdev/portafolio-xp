@@ -3,6 +3,7 @@ import { appIcons, icons } from '../../icons'
 import { useI18n } from '../../i18n/useI18n'
 import type { AppId } from '../appIds'
 import { openCv } from '../cv'
+import { useIsMobile } from '../useIsMobile'
 import { useWindowManager } from '../window-manager/useWindowManager'
 import { WindowLayer } from '../window-manager/WindowLayer'
 import { DesktopIcon } from './DesktopIcon'
@@ -10,8 +11,12 @@ import styles from './Desktop.module.css'
 
 type DesktopItem = AppId | 'cv'
 
-/** Spec §4.2: the CV on top, then the six sections; the Recycle Bin top right. */
-const LEFT_COLUMN: readonly DesktopItem[] = [
+/**
+ * Spec §4.2: the CV on top, then the six sections, in a column; the Recycle Bin
+ * in the top-right corner. One list, so mobile mode can lay them all out in a
+ * three-column grid (spec §4.7) in the same order.
+ */
+const ITEMS: readonly DesktopItem[] = [
   'cv',
   'about',
   'projects',
@@ -19,13 +24,15 @@ const LEFT_COLUMN: readonly DesktopItem[] = [
   'experience',
   'contact',
   'messenger',
+  'recycle-bin',
 ]
-const RIGHT_COLUMN: readonly DesktopItem[] = ['recycle-bin']
+const TOP_RIGHT: DesktopItem = 'recycle-bin'
 
 /** Wallpaper, icons and the windows on top of them. */
 export function Desktop() {
   const { t, lang } = useI18n()
   const { desktopRef, openApp } = useWindowManager()
+  const mobile = useIsMobile()
   const [selected, setSelected] = useState<DesktopItem | null>(null)
 
   // Entering the desktop puts the focus on it, unless a window already took it.
@@ -45,24 +52,6 @@ export function Desktop() {
     }
   }
 
-  const renderIcons = (items: readonly DesktopItem[], className: string) => (
-    <ul className={className}>
-      {items.map((item) => (
-        <li key={item}>
-          <DesktopIcon
-            label={
-              item === 'cv' ? t('actions.downloadCv') : t(`apps.${item}.title`)
-            }
-            icon={item === 'cv' ? icons.cv : appIcons[item]}
-            selected={selected === item}
-            onSelect={() => setSelected(item)}
-            onOpen={(icon) => open(item, icon)}
-          />
-        </li>
-      ))}
-    </ul>
-  )
-
   return (
     <main
       ref={desktopRef}
@@ -71,8 +60,27 @@ export function Desktop() {
       className={styles.desktop}
       onPointerDown={clearSelection}
     >
-      {renderIcons(LEFT_COLUMN, styles.left)}
-      {renderIcons(RIGHT_COLUMN, styles.right)}
+      <ul className={styles.icons}>
+        {ITEMS.map((item) => (
+          <li
+            key={item}
+            className={item === TOP_RIGHT ? styles.topRight : undefined}
+          >
+            <DesktopIcon
+              label={
+                item === 'cv'
+                  ? t('actions.downloadCv')
+                  : t(`apps.${item}.title`)
+              }
+              icon={item === 'cv' ? icons.cv : appIcons[item]}
+              selected={selected === item}
+              openOnClick={mobile}
+              onSelect={() => setSelected(item)}
+              onOpen={(icon) => open(item, icon)}
+            />
+          </li>
+        ))}
+      </ul>
       <WindowLayer />
     </main>
   )

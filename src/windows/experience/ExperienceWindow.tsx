@@ -4,6 +4,7 @@ import type { Experience, Name, Text } from '../../content/schema'
 import { appIcons, icons } from '../../icons'
 import type { MessageKey } from '../../i18n/messages'
 import { useI18n } from '../../i18n/useI18n'
+import { useIsMobile } from '../../os/useIsMobile'
 import { Explorer } from '../explorer/Explorer'
 import { TaskPaneItem } from '../explorer/TaskPaneItem'
 import { TaskPaneSection } from '../explorer/TaskPaneSection'
@@ -65,9 +66,13 @@ function tables({ work, education }: Experience): Table[] {
   ]
 }
 
-/** Work and education as two Details views of the Explorer (spec §5.4). */
+/**
+ * Work and education as two Details views of the Explorer (spec §5.4); in
+ * mobile mode each row is a card (spec §4.7).
+ */
 export function ExperienceWindow() {
   const { t, tn, localize, formatPeriod } = useI18n()
+  const mobile = useIsMobile()
   const id = useId()
   const headings = useRef(new Map<string, HTMLHeadingElement>())
   const sections = tables(content.experience)
@@ -114,7 +119,36 @@ export function ExperienceWindow() {
             {t(table.heading)}
           </h4>
 
-          {table.rows.length > 0 ? (
+          {table.rows.length === 0 ? (
+            <p className={text.empty}>{t('explorer.empty')}</p>
+          ) : mobile ? (
+            <ul className={styles.cards} aria-labelledby={`${id}-${table.key}`}>
+              {table.rows.map((row) => {
+                const period = formatPeriod(row.start, row.end)
+                return (
+                  <li key={row.id} className={styles.card}>
+                    <h5 className={styles.cardTitle}>
+                      <img className={styles.rowIcon} src={table.icon} alt="" />
+                      {localize(row.title)}
+                    </h5>
+                    <dl className={styles.facts}>
+                      <dt>{t(table.columns[1])}</dt>
+                      <dd>{localize(row.place)}</dd>
+                      <dt>{t('experience.period')}</dt>
+                      <dd>
+                        <span className={styles.range}>{period.range}</span>
+                        <span className={styles.duration}>
+                          {period.duration}
+                        </span>
+                      </dd>
+                      <dt>{t('experience.location')}</dt>
+                      <dd>{localize(row.location)}</dd>
+                    </dl>
+                  </li>
+                )
+              })}
+            </ul>
+          ) : (
             <div className={styles.frame}>
               <table
                 className={styles.details}
@@ -157,8 +191,6 @@ export function ExperienceWindow() {
                 </tbody>
               </table>
             </div>
-          ) : (
-            <p className={text.empty}>{t('explorer.empty')}</p>
           )}
         </section>
       ))}

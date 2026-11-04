@@ -36,6 +36,8 @@ export type WindowAction =
   | { type: 'move'; id: AppId; position: Point }
   /** The window shows another item (or its first one, without target); the hash follows (D29). */
   | { type: 'navigate'; id: AppId; target?: string }
+  /** Every window shrinks and moves to fit inside the desktop (spec §4.5). */
+  | { type: 'fit'; bounds: Size }
 
 export const initialWindowState: WindowManagerState = {
   windows: [],
@@ -85,6 +87,30 @@ function bringForward(
   }
 }
 
+/**
+ * Fits every window inside `bounds`, as opening does: the windows a deep link
+ * opened before the desktop had a size, and all of them when it gets smaller.
+ */
+function fitWindows(
+  state: WindowManagerState,
+  bounds: Size,
+): WindowManagerState {
+  let changed = false
+  const windows = state.windows.map((window) => {
+    const size = clampSize(window.size, bounds)
+    const position = clampPosition(window.position, size, bounds)
+    const same =
+      size.width === window.size.width &&
+      size.height === window.size.height &&
+      position.x === window.position.x &&
+      position.y === window.position.y
+    if (same) return window
+    changed = true
+    return { ...window, size, position }
+  })
+  return changed ? { ...state, windows } : state
+}
+
 function openWindow(
   state: WindowManagerState,
   { id, target, bounds }: Extract<WindowAction, { type: 'open' }>,
@@ -121,6 +147,7 @@ export function windowReducer(
   action: WindowAction,
 ): WindowManagerState {
   if (action.type === 'open') return openWindow(state, action)
+  if (action.type === 'fit') return fitWindows(state, action.bounds)
 
   const window = find(state, action.id)
   if (!window) return state

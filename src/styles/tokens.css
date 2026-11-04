@@ -163,6 +163,15 @@
   --color-floppy-mouth: var(--color-close-end);
 }
 
+/* Mobile mode (spec §4.7): the assistant as a floating button, in a strip of its
+   own above the taskbar (button, its padding and border, and the gap around it) */
+:root {
+  --assistant-button-size: var(--icon-size-medium);
+  --assistant-dock-height: calc(
+    var(--assistant-button-size) + 2 * (var(--space-2) + var(--border-width) + var(--space-2))
+  );
+}
+
 /* Control Panel › Reduce animations (D33): same effect as prefers-reduced-motion. */
 :root[data-reduce-motion] {
   --motion-duration: 0ms;

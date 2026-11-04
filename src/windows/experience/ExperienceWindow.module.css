@@ -59,3 +59,47 @@
   display: block;
   color: var(--color-text-muted);
 }
+
+/* Mobile mode (spec §4.7): one card per row, with the column names as labels. */
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  border: var(--border-width) solid var(--color-field-border);
+}
+
+.cardTitle {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: var(--border-width) solid var(--color-dialog-border);
+  background: linear-gradient(var(--color-window-body), var(--color-dialog));
+  font-size: inherit;
+  font-weight: bold;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--space-2) var(--space-3);
+  margin: 0;
+  padding: var(--space-3);
+}
+
+.facts dt {
+  color: var(--color-text-muted);
+}
+
+.facts dd {
+  min-width: 0;
+  margin: 0;
+}

@@ -2,6 +2,8 @@
    the session draws it after the desktop and before the menu. */
 
 .assistant {
+  /* Width of what the balloon's tail points at: the character or its button. */
+  --assistant-anchor: var(--assistant-size);
   position: absolute;
   right: var(--space-5);
   bottom: calc(var(--taskbar-height) + var(--space-3));
@@ -23,6 +25,49 @@
   flex: none;
   width: var(--assistant-size);
   height: var(--assistant-size);
+}
+
+/* Mobile mode (spec §4.7): the character shrinks into a floating button, in
+   the strip the session keeps for it above the taskbar. */
+@media (width < 768px) {
+  .assistant {
+    --assistant-anchor: calc(
+      var(--assistant-button-size) + 2 * (var(--space-2) + var(--border-width))
+    );
+    right: var(--space-3);
+    bottom: calc(var(--taskbar-height) + var(--space-2));
+    gap: var(--space-3);
+    max-width: calc(100% - 2 * var(--space-3));
+  }
+
+  .character {
+    width: var(--assistant-button-size);
+    height: var(--assistant-button-size);
+  }
+}
+
+/* Resets XP.css's `button` rules; hover and pressed states need the longer selectors. */
+.button {
+  flex: none;
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  padding: var(--space-2);
+  border: var(--border-width) solid var(--color-balloon-border);
+  border-radius: var(--radius-window);
+  background: var(--color-balloon);
+  box-shadow: var(--shadow-window);
+  pointer-events: auto;
+}
+
+.button:focus,
+.button:not(:disabled):hover {
+  box-shadow: var(--shadow-window);
+}
+
+.button:not(:disabled):active {
+  box-shadow: none;
+  background: var(--color-dialog);
 }
 
 /* Out of sight, still read by screen readers. */

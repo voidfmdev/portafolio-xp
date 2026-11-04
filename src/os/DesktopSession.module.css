@@ -6,6 +6,11 @@
   overflow: hidden;
 }
 
+/* Mobile mode with the assistant on: maximized windows stop above its button. */
+.session[data-assistant-dock] {
+  --desktop-dock-height: var(--assistant-dock-height);
+}
+
 /* Short fade from the welcome screen (spec §4.1). */
 @media (prefers-reduced-motion: no-preference) {
   .session {

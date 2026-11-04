@@ -157,6 +157,88 @@
   outline: none;
 }
 
+/* Mobile mode (spec §4.7): the task pane drops down from a bar above the content. */
+@media (width < 768px) {
+  .main {
+    flex-direction: column;
+  }
+
+  .taskPane {
+    width: auto;
+    max-height: 50%;
+    border-bottom: var(--border-width) solid var(--color-taskpane-end);
+  }
+
+  .content {
+    flex: 1;
+    min-height: 0;
+    padding: var(--space-4);
+  }
+}
+
+/* Drop-down toggle, drawn as a task pane header. Resets XP.css's `button` rules;
+   hover, pressed and focus states need the longer selectors. */
+.paneToggle {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  min-height: var(--addressbar-height);
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  border-bottom: var(--border-width) solid var(--color-taskpane-end);
+  border-radius: 0;
+  background: linear-gradient(
+    to right,
+    var(--color-taskpane-header-start),
+    var(--color-taskpane-header-end)
+  );
+  box-shadow: none;
+  color: var(--color-taskpane-title);
+  font: inherit;
+  font-weight: bold;
+  text-align: left;
+}
+
+.paneToggle:focus,
+.paneToggle:not(:disabled):hover,
+.paneToggle:not(:disabled):active {
+  box-shadow: none;
+}
+
+.paneToggleIcon {
+  flex: none;
+  width: var(--icon-size-small);
+  height: var(--icon-size-small);
+}
+
+.paneToggleText {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Chevron, drawn with borders like the crumbs; it points up while the pane is open. */
+.paneToggle::after {
+  content: '';
+  flex: none;
+  width: var(--space-3);
+  height: var(--space-3);
+  margin: 0 var(--space-2) var(--space-2);
+  border-right: var(--focus-ring-width) solid var(--color-taskpane-title);
+  border-bottom: var(--focus-ring-width) solid var(--color-taskpane-title);
+  transform: rotate(45deg);
+}
+
+.paneToggle[aria-expanded='true']::after {
+  margin-bottom: 0;
+  margin-top: var(--space-2);
+  transform: rotate(-135deg);
+}
+
 .statusBar {
   flex: none;
   min-height: var(--statusbar-height);

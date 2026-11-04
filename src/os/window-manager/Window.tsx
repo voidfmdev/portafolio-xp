@@ -8,6 +8,7 @@ import {
 } from 'react'
 import { useI18n } from '../../i18n/useI18n'
 import { keepTabInside } from '../../lib/a11y'
+import { useIsMobile } from '../useIsMobile'
 import {
   CONTROL_LABEL,
   XP_CONTROL_STYLE,
@@ -15,7 +16,7 @@ import {
 } from './titleBarControls'
 import { isOnTitleBarControls, useWindowDrag } from './useWindowDrag'
 import { useWindowManager } from './useWindowManager'
-import type { WindowState } from './windowReducer'
+import { visibleWindows, type WindowState } from './windowReducer'
 import styles from './Window.module.css'
 
 interface WindowProps {
@@ -25,14 +26,22 @@ interface WindowProps {
   children?: ReactNode
 }
 
-/** XP window: title bar with its buttons, dragging, focus and stacking (spec §4.5). */
+/**
+ * XP window: title bar with its buttons, dragging, focus and stacking (spec §4.5).
+ * In mobile mode (spec §4.7) it is always maximized, cannot be dragged, and
+ * only the topmost visible window shows.
+ */
 export function Window({ window, title, icon, children }: WindowProps) {
   const { t } = useI18n()
   const { state, closeApp, minimizeApp, maximizeApp, restoreApp, focusApp } =
     useWindowManager()
+  const mobile = useIsMobile()
   const id = useId()
   const ref = useRef<HTMLElement>(null)
-  const drag = useWindowDrag(window, ref)
+  // The state keeps the desktop layout, so leaving mobile mode restores it.
+  const maximized = window.maximized || mobile
+  const covered = mobile && visibleWindows(state)[0]?.id !== window.id
+  const drag = useWindowDrag({ ...window, maximized }, ref)
   const isActive = state.activeId === window.id
   const zIndex = state.zOrder.indexOf(window.id) + 1
 
@@ -56,12 +65,17 @@ export function Window({ window, title, icon, children }: WindowProps) {
       control: 'minimize',
       onClick: () => minimizeApp(window.id),
     },
-    {
-      // Same key for both states, so the button keeps the focus when it switches.
-      key: 'size',
-      control: window.maximized ? 'restore' : 'maximize',
-      onClick: toggleMaximize,
-    },
+    // Mobile windows are always maximized: no size button.
+    ...(mobile
+      ? []
+      : [
+          {
+            // Same key for both states, so the button keeps the focus when it switches.
+            key: 'size',
+            control: window.maximized ? 'restore' : 'maximize',
+            onClick: toggleMaximize,
+          } as const,
+        ]),
     { key: 'close', control: 'close', onClick: () => closeApp(window.id) },
   ]
 
@@ -76,19 +90,19 @@ export function Window({ window, title, icon, children }: WindowProps) {
   }
 
   function onTitleDoubleClick(event: MouseEvent<HTMLElement>) {
-    if (!isOnTitleBarControls(event.target)) toggleMaximize()
+    if (!mobile && !isOnTitleBarControls(event.target)) toggleMaximize()
   }
 
   const className = [
     'window',
     styles.window,
     !isActive && styles.inactive,
-    window.maximized && styles.maximized,
+    maximized && styles.maximized,
   ]
     .filter(Boolean)
     .join(' ')
 
-  const placement = window.maximized
+  const placement = maximized
     ? { zIndex }
     : {
         zIndex,
@@ -104,7 +118,7 @@ export function Window({ window, title, icon, children }: WindowProps) {
       role="dialog"
       aria-labelledby={`${id}-title`}
       tabIndex={-1}
-      hidden={window.minimized}
+      hidden={window.minimized || covered}
       className={className}
       style={placement}
       onPointerDownCapture={() => focusApp(window.id)}
