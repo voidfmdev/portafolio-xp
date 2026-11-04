@@ -1,6 +1,6 @@
 # Esquemas de contenido — Portafolio XP
 
-Estado: **[DE]** · Fecha: 2026-11-03 · Decisiones asociadas: D17 y D20 a D24.
+Estado: **[DE]** · Fecha: 2026-11-03 · Decisiones asociadas: D17, D20 a D24, D38 y D44.
 Fuente: `docs/spec.md` §5 y §7. Los campos que la spec enumera literalmente (Proyectos §5.2, Habilidades §5.3) se respetan; el resto lo fija D17, y las preguntas que quedaban abiertas se resolvieron en D20 a D24 (§9).
 Implementación: esquemas Zod en `src/content/schema.ts` (Fase 2), validados en una prueba de Vitest y en `build`.
 
@@ -49,6 +49,7 @@ Notación tipo TypeScript; `?` = opcional. El orden de cada lista es el orden en
 ```
 
 - `site` lo lee el build, no la interfaz: el gancho de Vite para el HTML lo escribe en `index.html` en español por defecto, con `og:locale` `es_CL` y `og:locale:alternate` `en_US` (D24). Los rastreadores no ejecutan JavaScript, por eso no basta con escribirlo en tiempo de ejecución.
+- El mismo gancho escribe el `<noscript>` de `index.html` en ambos idiomas (D44) con `site`, `name`, `role`, `location` y `cv`, más los proyectos (`name`, `summary`) y `contact.json`.
 
 ## 2. `projects.json` — Proyectos (spec §5.2)
 
@@ -138,7 +139,6 @@ Notación tipo TypeScript; `?` = opcional. El orden de cada lista es el orden en
 ```ts
 {
   header: {
-    name: Name                       // nombre del asistente
     personalMessage: Text            // mensaje personal bajo el estado
   }
   greeting: Text                     // primer mensaje al abrir la ventana
@@ -161,13 +161,13 @@ type Action =
 - Una respuesta sin `followUps` vuelve a ofrecer las preguntas de `start`, así la conversación nunca queda sin salida (D22).
 - Todo id de `start` y `followUps` existe en `questions`; los ids no se repiten.
 - `target` solo con `app: "projects"` o `"skills"`, y debe existir en `projects.json` o `skills.json` (validación entre archivos).
-- El avatar es el personaje del asistente (contrato `Character`), no una imagen; "Disponible" y las horas los pone la interfaz.
+- El avatar es el personaje del asistente (contrato `Character`), no una imagen; su nombre, "Disponible" y las horas los pone la interfaz. El nombre vive solo en la clave `assistant.name` de i18n, la misma del globo del escritorio (D38).
 
 Ejemplo mínimo:
 
 ```json
 {
-  "header": { "name": "[RELLENO] Asistente", "personalMessage": { "es": "[RELLENO] …", "en": "[RELLENO] …" } },
+  "header": { "personalMessage": { "es": "[RELLENO] …", "en": "[RELLENO] …" } },
   "greeting": { "es": "[RELLENO] ¡Hola!", "en": "[RELLENO] Hi!" },
   "start": ["who"],
   "questions": [
@@ -199,8 +199,8 @@ Ejemplo mínimo:
 
 - Un esquema Zod por archivo y los tipos de TypeScript derivados de ellos (`z.infer`), así el código y el JSON no se separan.
 - Comprobaciones entre archivos: `target` de Messenger, unicidad de slugs e ids.
-- Se ejecuta en `npm run test` y en `npm run build`; un JSON inválido corta el build con el archivo y la ruta del campo (D26 [PE]).
-- Un campo que no está en el esquema es un error, para que un nombre mal escrito no se ignore en silencio (D26 [PE]).
+- Se ejecuta en `npm run test` y en `npm run build`; un JSON inválido corta el build con el archivo y la ruta del campo (D26).
+- Un campo que no está en el esquema es un error, para que un nombre mal escrito no se ignore en silencio (D26).
 - Paridad (D20): todo `Text`, incluido el de un `Name` bilingüe, tiene `es` y `en` no vacíos.
 - Modo estricto (D21): con `CONTENT_STRICT=true`, el build falla si queda un marcador (`<…>` o `[RELLENO]`) en `Url`, `Email`, `AssetPath` o en cualquier texto (`Text`, `Name` y cadenas simples como `name` o `alias`). Se activa en el workflow de despliegue al cerrar la Fase 3; hasta entonces queda apagado y los marcadores se aceptan.
 
