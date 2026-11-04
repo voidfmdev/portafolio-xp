@@ -1,0 +1,179 @@
+/* Floppy (D5). Poses are static and always apply; motion only runs when the
+   root says so (`data-motion="full"`), which already accounts for the system
+   setting and "Reduce animations" (D33). Transforms are relative to each part's
+   own box (`fill-box`), so they hold at any size. */
+
+.floppy {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* The greet hop and the tilt go a little past the drawing's box. */
+  overflow: visible;
+}
+
+.figure,
+.eye,
+.pupil,
+.shutter,
+.mouth {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Hops and tilts from the bottom edge, like something standing on the taskbar. */
+.figure {
+  transform-origin: 50% 100%;
+}
+
+/* Colors */
+
+.body {
+  fill: var(--color-floppy-body);
+  stroke: var(--color-floppy-outline);
+}
+
+.notch,
+.slot {
+  fill: var(--color-floppy-outline);
+}
+
+.metal {
+  fill: var(--color-floppy-shutter);
+  stroke: var(--color-floppy-outline);
+}
+
+.label {
+  fill: var(--color-floppy-label);
+  stroke: var(--color-floppy-outline);
+}
+
+.band {
+  fill: var(--color-floppy-band);
+}
+
+.sclera {
+  fill: var(--color-floppy-eye);
+  stroke: var(--color-floppy-outline);
+}
+
+.iris {
+  fill: var(--color-floppy-pupil);
+}
+
+.glint {
+  fill: var(--color-floppy-eye);
+}
+
+.smile {
+  fill: none;
+  stroke: var(--color-floppy-outline);
+}
+
+.mouth {
+  fill: var(--color-floppy-mouth);
+  stroke: var(--color-floppy-outline);
+  visibility: hidden;
+}
+
+/* Poses */
+
+.floppy[data-animation='talk'] .smile {
+  visibility: hidden;
+}
+
+.floppy[data-animation='talk'] .mouth {
+  visibility: visible;
+}
+
+/* Thinking: the eyes look up and aside. */
+.floppy[data-animation='think'] .pupil {
+  transform: translate(-30%, -45%);
+}
+
+/* Motion */
+
+@media (prefers-reduced-motion: no-preference) {
+  .floppy[data-motion='full'][data-animation='idle'] .eye,
+  .floppy[data-motion='full'][data-animation='talk'] .eye {
+    animation: blink var(--assistant-blink-cycle) infinite;
+  }
+
+  .floppy[data-motion='full'][data-animation='greet'] .figure {
+    animation: greet var(--assistant-greet-duration) ease-in-out;
+  }
+
+  .floppy[data-motion='full'][data-animation='talk'] .mouth {
+    animation: talk var(--assistant-talk-duration) ease-in-out infinite
+      alternate;
+  }
+
+  /* The shutter slides back and forth, as if reading the disk. */
+  .floppy[data-motion='full'][data-animation='think'] .shutter {
+    animation: think var(--assistant-think-duration) ease-in-out infinite;
+  }
+
+  .floppy[data-motion='full'][data-animation='hide'] .figure {
+    animation: hide var(--assistant-hide-duration) ease-in forwards;
+  }
+}
+
+@keyframes blink {
+  0%,
+  94%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  97% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes greet {
+  0%,
+  40%,
+  100% {
+    transform: none;
+  }
+
+  20% {
+    transform: translateY(-8%) rotate(-8deg);
+  }
+
+  60% {
+    transform: translateY(-4%) rotate(8deg);
+  }
+
+  80% {
+    transform: rotate(-4deg);
+  }
+}
+
+@keyframes talk {
+  from {
+    transform: scaleY(0.35);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes think {
+  0%,
+  100% {
+    transform: none;
+  }
+
+  50% {
+    transform: translateX(-22%);
+  }
+}
+
+/* Ducks down behind the taskbar and fades out. */
+@keyframes hide {
+  to {
+    transform: translateY(40%);
+    opacity: 0;
+  }
+}
