@@ -140,6 +140,29 @@
   --color-error: var(--color-close-end);
 }
 
+/* Desktop assistant and its character, Floppy (D39): sizes, animation timing and
+   aliases of D13 colors, no new colors */
+:root {
+  --assistant-size: 72px;
+  --balloon-width: 260px;
+  --balloon-tail-size: 12px;
+
+  --assistant-blink-cycle: 4s;
+  --assistant-greet-duration: 900ms;
+  --assistant-talk-duration: 320ms;
+  --assistant-think-duration: 1200ms;
+  --assistant-hide-duration: 400ms;
+
+  --color-floppy-body: var(--color-title-mid);
+  --color-floppy-outline: var(--color-title-shadow);
+  --color-floppy-shutter: var(--color-dialog-border);
+  --color-floppy-label: var(--color-window-body);
+  --color-floppy-band: var(--color-close-start);
+  --color-floppy-eye: var(--color-window-body);
+  --color-floppy-pupil: var(--color-text);
+  --color-floppy-mouth: var(--color-close-end);
+}
+
 /* Control Panel › Reduce animations (D33): same effect as prefers-reduced-motion. */
 :root[data-reduce-motion] {
   --motion-duration: 0ms;
