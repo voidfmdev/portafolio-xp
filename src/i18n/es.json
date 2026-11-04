@@ -48,6 +48,7 @@
   "explorer.forward": "Adelante",
   "explorer.address": "Dirección",
   "explorer.taskPane": "Panel de tareas",
+  "explorer.taskPaneToggle": "{current} (panel de tareas)",
   "explorer.projectCount.one": "{count} proyecto",
   "explorer.projectCount.other": "{count} proyectos",
   "explorer.categoryCount.one": "{count} categoría",
@@ -108,6 +109,7 @@
   "assistant.said": "{name} dice: {message}",
   "assistant.close": "Cerrar mensaje",
   "assistant.dontShowAgain": "No mostrar más",
+  "assistant.button": "Pedir ayuda a {name}",
 
   "recycleBin.empty": "La papelera está vacía",
 
@@ -119,5 +121,7 @@
   "controlPanel.resetConfirm": "Se borrarán las preferencias guardadas en este navegador. ¿Continuar?",
 
   "dialog.ok": "Aceptar",
-  "dialog.cancel": "Cancelar"
+  "dialog.cancel": "Cancelar",
+
+  "noscript.message": "Este portafolio muestra un escritorio interactivo que necesita JavaScript. Aquí está lo esencial."
 }

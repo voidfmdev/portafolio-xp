@@ -2,6 +2,8 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig, loadEnv, type Plugin } from 'vite'
 import { contentFiles } from './src/content/files.ts'
+import type { Content } from './src/content/schema.ts'
+import { writeSiteHtml } from './src/content/siteHtml.ts'
 import { validateContent } from './src/content/validate.ts'
 
 // Invalid content stops the build before bundling, with the file and field of each
@@ -17,6 +19,24 @@ function validateContentPlugin(strict: boolean): Plugin {
           `Invalid content${strict ? ' (CONTENT_STRICT=true)' : ''}:\n${errors.map((error) => `  - ${error}`).join('\n')}`,
         )
       }
+    },
+  }
+}
+
+// Crawlers do not run JavaScript: title, description and Open Graph tags (D24)
+// and the <noscript> summary are written into index.html from the content.
+function siteHtmlPlugin(): Plugin {
+  let base = '/'
+  return {
+    name: 'site-html',
+    configResolved(config) {
+      base = config.base
+    },
+    transformIndexHtml: {
+      order: 'pre',
+      // `vite build` validated the files in buildStart, before this hook runs.
+      handler: (html) =>
+        writeSiteHtml(html, contentFiles as unknown as Content, base),
     },
   }
 }
@@ -59,6 +79,7 @@ export default defineConfig(({ mode }) => {
     base: VITE_BASE || '/',
     plugins: [
       validateContentPlugin(CONTENT_STRICT === 'true'),
+      siteHtmlPlugin(),
       stripXpFonts(),
       react(),
     ],
@@ -68,6 +89,8 @@ export default defineConfig(({ mode }) => {
       lightningcss: { errorRecovery: true },
     },
     test: {
+      // Stylesheets stay empty in tests, except those a test reads as text.
+      css: { include: [/\.css\?raw$/] },
       environment: 'jsdom',
       setupFiles: ['src/vitest.setup.ts'],
     },

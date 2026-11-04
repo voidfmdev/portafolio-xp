@@ -48,6 +48,7 @@
   "explorer.forward": "Forward",
   "explorer.address": "Address",
   "explorer.taskPane": "Task pane",
+  "explorer.taskPaneToggle": "{current} (task pane)",
   "explorer.projectCount.one": "{count} project",
   "explorer.projectCount.other": "{count} projects",
   "explorer.categoryCount.one": "{count} category",
@@ -108,6 +109,7 @@
   "assistant.said": "{name} says: {message}",
   "assistant.close": "Close message",
   "assistant.dontShowAgain": "Don't show again",
+  "assistant.button": "Ask {name} for help",
 
   "recycleBin.empty": "The Recycle Bin is empty",
 
@@ -119,5 +121,7 @@
   "controlPanel.resetConfirm": "This clears the preferences saved in this browser. Continue?",
 
   "dialog.ok": "OK",
-  "dialog.cancel": "Cancel"
+  "dialog.cancel": "Cancel",
+
+  "noscript.message": "This portfolio shows an interactive desktop that needs JavaScript. Here are the essentials."
 }
